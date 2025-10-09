@@ -21,7 +21,8 @@ publishDir   = "public"
 buildDrafts  = false
 buildFuture  = false
 buildExpired = false
-canonifyURLs = true
+canonifyURLs = false
+relativeURLs = true
 
 enableRobotsTXT = true
 enableGitInfo   = false
