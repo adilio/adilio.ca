@@ -1,24 +1,2 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Posts on adilio.io</title>
-        <link>https://adilio.io/posts/</link>
-        <description>Recent content in Posts on adilio.io</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sat, 05 Feb 2022 12:44:31 -0800</lastBuildDate>
-        <atom:link href="https://adilio.io/posts/index.xml" rel="self" type="application/rss+xml" />
-        
-        <item>
-            <title>Hello, Friend</title>
-            <link>https://adilio.io/posts/2022/02/hello-friend/</link>
-            <pubDate>Sat, 05 Feb 2022 12:44:31 -0800</pubDate>
-            
-            <guid>https://adilio.io/posts/2022/02/hello-friend/</guid>
-            <description>Hello, Friend. I am Adil.</description>
-            <content type="html"><![CDATA[<p>Hello, Friend. I am Adil.</p>
-]]></content>
-        </item>
-        
-    </channel>
-</rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on adilio.ca</title><link>https://adilio.ca/posts/</link><description>Recent content in Posts on adilio.ca</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>&lt;a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener"&gt;CC BY-NC 4.0&lt;/a&gt;</copyright><lastBuildDate>Sat, 05 Feb 2022 12:44:31 -0800</lastBuildDate><atom:link href="https://adilio.ca/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello, Friend</title><link>https://adilio.ca/posts/2022/02/hello-friend/</link><pubDate>Sat, 05 Feb 2022 12:44:31 -0800</pubDate><guid>https://adilio.ca/posts/2022/02/hello-friend/</guid><description>&lt;p&gt;Hello, Friend. I am Adil.&lt;/p&gt;</description><content type="html">&lt;p>Hello, Friend. I am Adil.&lt;/p>
+</content></item></channel></rss>

@@ -1,12 +1,11 @@
-baseurl      = "https://adilio.io"
-title        = "adilio.io"
+baseurl      = "https://adilio.ca"
+title        = "adilio.ca"
 languageCode = "en-us"
 theme        = "hello-friend-ng"
 
 PygmentsCodeFences = true
 PygmentsStyle = "monokai"
 
-paginate  = 10
 rssLimit  = 10  # Maximum number of items in the RSS feed.
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
 
@@ -33,10 +32,13 @@ disableSitemap = false
 disable404     = false
 disableHugoGeneratorInject = false
 
+
+[pagination]
+  pagerSize = 10
 [permalinks]
   posts = "/posts/:year/:month/:title/"
 
-[author]
+[params.author]
   name = "Adil Leghari"
 
 [blackfriday]
@@ -130,7 +132,7 @@ disableHugoGeneratorInject = false
 
   [params.logo]
     logoMark     = ">_"
-    logoText     = "$ adilio.io"
+    logoText     = "$ adilio.ca"
     logoHomeLink = "/"
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
