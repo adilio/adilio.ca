@@ -1,55 +1,96 @@
 {{ define "body" }}
-    <body class="{{ if .Site.Params.backgroundImage }} background-image" style="background-image: url('{{ .Site.Params.backgroundImage }}');" {{ else }}"{{ end }}>
+  <body{{ if .Site.Params.backgroundImage }} class="background-image" style="background-image: url('{{ .Site.Params.backgroundImage }}');"{{ end }}>
 {{ end }}
 
 {{ define "main" }}
+  <main role="main">
+    <section class="hero">
+      <span class="hero-glow hero-glow--one" aria-hidden="true"></span>
+      <span class="hero-glow hero-glow--two" aria-hidden="true"></span>
 
-    <main aria-role="main">
-        <div>
-            {{ if .Site.Params.Portrait.Path }}
-               <img src="{{ .Site.Params.Portrait.Path }}" class="circle" alt="{{ .Site.Params.Portrait.Alt }}" style="max-width:{{ .Site.Params.Portrait.MaxWidth }}" />
-            {{ end }}
-
-            <h1>{{ .Site.Title }}</h1>
-
-            {{ partial "subtitle.html" . }}
-
-            {{- with .Site.Params.social }}
-                <div>
-                    {{ partial "social-icons.html" . }}
-                </div>
-            {{- end }}
+      <div class="hero-content" data-animate>
+        <p class="hero-eyebrow">Cloud Solutions Architect · Automation Advocate</p>
+        <h1>{{ .Site.Title }}</h1>
+        <div class="hero-subtitle">
+          {{ partial "subtitle.html" . }}
         </div>
-    </main>
+        <p class="hero-description">
+          Designing secure, scalable experiences as a Cloud Solutions Architect at Palo Alto Networks and empowering teams with automation-first stories.
+        </p>
+        <ul class="hero-tags">
+          <li>Cloud Architecture</li>
+          <li>Automation</li>
+          <li>Community Building</li>
+        </ul>
+        <div class="hero-actions">
+          <a href="/about" class="btn btn-primary">About Me</a>
+          <a href="#recent-projects" class="btn btn-secondary">Recent Work</a>
+        </div>
+        {{- with .Site.Params.social }}
+          <div class="hero-social">
+            {{ partial "social-icons.html" . }}
+          </div>
+        {{- end }}
+      </div>
 
-    {{- /* Recent Projects Section */ -}}
-    {{ partial "recent-projects.html" . }}
+      {{ if .Site.Params.Portrait.Path }}
+        <div class="hero-visual" data-animate>
+          <div class="hero-avatar">
+            <span class="hero-avatar__pulse" aria-hidden="true"></span>
+            <img src="{{ .Site.Params.Portrait.Path }}" alt="{{ .Site.Params.Portrait.Alt }}" loading="lazy" />
+          </div>
+        </div>
+      {{ end }}
+    </section>
 
-    {{ $paginator := .Paginate (where .Pages "Type" "posts") }}
-    <main class="posts">
-        <h2>Recent Posts</h2>
-        {{ range $paginator.Pages.GroupByDate "2006" }}
-            <div class="posts-group">
-                <div class="post-year">{{ .Key }}</div>
+    <section class="hero-highlights">
+      <article class="highlight-card" data-animate>
+        <h3>What I'm focused on</h3>
+        <p>Helping customers unlock resilient, secure cloud journeys at Palo Alto Networks with opinionated architectures and enablement.</p>
+      </article>
+      <article class="highlight-card" data-animate>
+        <h3>Community &amp; storytelling</h3>
+        <p>Co-founding the Pacific Northwest PowerShell User Group and co-hosting BridgeConf to share automation wins with the community.</p>
+      </article>
+      <article class="highlight-card" data-animate>
+        <h3>Let's collaborate</h3>
+        <p>Always excited to pair on design sessions, demystify DevOps tooling, and craft delightful developer experiences.</p>
+      </article>
+    </section>
 
-                <ul class="posts-list">
-                    {{ range .Pages }}
-                        <li class="post-item">
-                            <a href="{{.Permalink}}">
-                                <span class="post-title">{{.Title}}</span>
-                                <span class="post-day">
-                                    {{ if .Site.Params.dateformShort }}
-                                        {{ .Date.Format .Site.Params.dateformShort }}
-                                    {{ else }}
-                                        {{ .Date.Format "Jan 2"}}
-                                    {{ end }}
-                                </span>
-                            </a>
-                        </li>
-                    {{ end }}
-                </ul>
-            </div>
-        {{ end }}
+    <button class="scroll-indicator" type="button" data-scroll-target="#recent-projects" aria-label="Scroll to recent projects">
+      <span class="scroll-indicator__icon" aria-hidden="true">↓</span>
+    </button>
+  </main>
+
+  {{- /* Recent Projects Section */ -}}
+  {{ partial "recent-projects.html" . }}
+
+  {{ $paginator := .Paginate (where .Pages "Type" "posts") }}
+  <main class="posts" data-animate>
+    <h2>Recent Posts</h2>
+    {{ range $paginator.Pages.GroupByDate "2006" }}
+      <div class="posts-group">
+        <div class="post-year">{{ .Key }}</div>
+
+        <ul class="posts-list">
+          {{ range .Pages }}
+            <li class="post-item">
+              <a href="{{ .Permalink }}">
+                <span class="post-title">{{ .Title }}</span>
+                <span class="post-day">
+                  {{ if .Site.Params.dateformShort }}
+                    {{ .Date.Format .Site.Params.dateformShort }}
+                  {{ else }}
+                    {{ .Date.Format "Jan 2" }}
+                  {{ end }}
+                </span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
     {{ partial "pagination-list.html" . }}
-    </main>
+  </main>
 {{ end }}

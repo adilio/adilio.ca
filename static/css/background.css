@@ -1,18 +1,29 @@
-/* QRCheck-Inspired Animated Background System */
+/* Animated aurora background and particle system */
 
-/* Animated Gradient Background */
 body {
   background: linear-gradient(
     135deg,
     var(--bg-dark-start) 0%,
-    var(--bg-dark-mid) 50%,
+    var(--bg-dark-mid) 45%,
     var(--bg-dark-end) 100%
   );
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  background-size: 220% 220%;
+  animation: gradientShift 22s ease infinite;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.18), transparent 55%),
+              radial-gradient(circle at 80% 10%, rgba(236, 72, 153, 0.12), transparent 60%),
+              radial-gradient(circle at 50% 80%, rgba(168, 85, 247, 0.18), transparent 55%);
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: -1;
 }
 
 @keyframes gradientShift {
@@ -21,17 +32,36 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Light Mode Background */
-body[data-theme='light'] {
+@media (prefers-color-scheme: light) {
+  body:not([data-theme]) {
+    background: linear-gradient(
+      135deg,
+      var(--bg-light-start) 0%,
+      var(--bg-light-mid) 45%,
+      var(--bg-light-end) 100%
+    );
+  }
+}
+
+[data-theme='light'] body {
   background: linear-gradient(
     135deg,
     var(--bg-light-start) 0%,
-    var(--bg-light-mid) 50%,
+    var(--bg-light-mid) 45%,
     var(--bg-light-end) 100%
   );
 }
 
-/* Particle Container */
+[data-theme='dark'] body,
+body:not([data-theme]) {
+  background: linear-gradient(
+    135deg,
+    var(--bg-dark-start) 0%,
+    var(--bg-dark-mid) 45%,
+    var(--bg-dark-end) 100%
+  );
+}
+
 .particle-container {
   position: fixed;
   top: 0;
@@ -43,42 +73,41 @@ body[data-theme='light'] {
   overflow: hidden;
 }
 
-/* Individual Particles */
 .particle {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
-  opacity: 0.6;
-  filter: blur(1px);
+  opacity: 0.75;
+  filter: blur(0.5px);
   animation: float linear infinite;
+  box-shadow: 0 0 12px currentColor;
+  mix-blend-mode: screen;
 }
 
 @keyframes float {
   0% {
-    transform: translateY(100vh) translateX(0) scale(0);
+    transform: translateY(100vh) translateX(0) scale(0.4);
     opacity: 0;
   }
   10% {
-    opacity: 0.6;
+    opacity: 0.75;
   }
   90% {
     opacity: 0.6;
   }
   100% {
-    transform: translateY(-100px) translateX(var(--drift)) scale(1);
+    transform: translateY(-120px) translateX(var(--drift)) scale(1.1);
     opacity: 0;
   }
 }
 
-/* Particle Color Variants */
-.particle.pink { background: var(--particle-pink); }
-.particle.magenta { background: var(--particle-magenta); }
-.particle.purple { background: var(--particle-purple); }
-.particle.blue { background: var(--particle-blue); }
-.particle.cyan { background: var(--particle-cyan); }
-.particle.deep-purple { background: var(--particle-deep-purple); }
+.particle.pink { background: var(--particle-pink); color: var(--particle-pink); }
+.particle.magenta { background: var(--particle-magenta); color: var(--particle-magenta); }
+.particle.purple { background: var(--particle-purple); color: var(--particle-purple); }
+.particle.blue { background: var(--particle-blue); color: var(--particle-blue); }
+.particle.cyan { background: var(--particle-cyan); color: var(--particle-cyan); }
+.particle.deep-purple { background: var(--particle-deep-purple); color: var(--particle-deep-purple); }
 
-/* Optional Hero Glow */
 .hero-glow {
   position: absolute;
   width: 600px;
@@ -90,16 +119,14 @@ body[data-theme='light'] {
   );
   filter: blur(80px);
   pointer-events: none;
-  z-index: -1;
+  z-index: -2;
 }
 
-/* Ensure content appears above background */
 .container {
   position: relative;
   z-index: 1;
 }
 
-/* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
   .particle {
     animation: none;
