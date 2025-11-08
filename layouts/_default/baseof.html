@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language }}">
+    <head>
+        {{ partial "head.html" . }}
+    </head>
+
+    {{ block "body" . }}
+        <body>
+    {{ end }}
+
+        {{- /* QRCheck-Inspired Animated Background */ -}}
+        {{ partial "background.html" . }}
+
+        <div class="container">
+            {{ partial "header.html" . }}
+
+            <div class="content">
+                {{ block "main" . }}{{ end }}
+            </div>
+
+            {{ block "footer" . }}
+                {{ partial "footer.html" . }}
+            {{ end }}
+        </div>
+
+        {{ partial "javascript.html" . }}
+    </body>
+</html>
