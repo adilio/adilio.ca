@@ -31,6 +31,10 @@ pluralizelisttitles = false
         name = "LinkedIn"
         url = "https://www.linkedin.com/in/adilio"
 
+    [[params.social]]
+        name = "Bluesky"
+        url = "https://bsky.app/profile/adilio.ca"
+
 [taxonomies]
     series = "series"
     tag = "tags"
