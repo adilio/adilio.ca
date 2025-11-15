@@ -1,8 +1,10 @@
 baseURL = "https://adilio.ca"
 languageCode = "en-us"
 theme = "poison"
-paginate = 10
 pluralizelisttitles = false
+
+[pagination]
+    pagerSize = 10
 
 [params]
     brand = "adilio.ca"

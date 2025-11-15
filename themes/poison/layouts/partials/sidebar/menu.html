@@ -5,7 +5,7 @@
         {{ $taxonomies := .Site.Taxonomies }}
         {{ range .Site.Params.menu }}
         {{ $menu_item := . }}
-            {{ if eq (len $menu_item.URL) 0 }}
+            {{ if not $menu_item.URL }}
                 <li class="heading">{{ $menu_item.Name }}</li>
             {{ else if $menu_item.External }}
                 <li class="bullet">
