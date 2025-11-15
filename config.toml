@@ -156,8 +156,8 @@ disableHugoGeneratorInject = false
   # Uncomment this if you want a portrait on your start page
   #
  [params.portrait]
-   path     = "/img/image.jpg"
-   alt      = "Portrait"
+   path     = "/img/adil-cartoon-headshot.png"
+   alt      = "Adil Leghari"
    maxWidth = "300px"
 
   # Social icons
