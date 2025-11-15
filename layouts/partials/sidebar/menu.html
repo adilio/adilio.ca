@@ -1,7 +1,5 @@
 <nav>
     <ul class="sidebar-nav">
-        {{ $sections := .Site.Sections.ByTitle }}
-        {{ $taxonomies := .Site.Taxonomies }}
         {{ range .Site.Params.menu }}
         {{ $menu_item := . }}
             {{ if not $menu_item.URL }}
@@ -9,66 +7,14 @@
                 <li class="heading">{{ $menu_item.Name }}</li>
             {{ else if $menu_item.External }}
                 {{/* External link */}}
-                <li class="bullet">
+                <li class="heading">
                     <a href="{{ $menu_item.URL }}" target="_blank" rel="noopener noreferrer">{{ $menu_item.Name }}</a>
                 </li>
             {{ else }}
-                {{/* Internal link - check if it matches a section */}}
-                {{ $matchedSection := false }}
-                {{ range $sections }}
-                    {{ $trimmedURL := (lower (strings.TrimSuffix "/" (strings.TrimPrefix "/" $menu_item.URL))) }}
-                    {{ if eq (lower .Title) (replace $trimmedURL "-" " ") }}
-                        {{ $matchedSection = true }}
-                        <li class="heading">
-                            <a href="{{ $menu_item.URL }}">{{ $menu_item.Name }}</a>
-                        </li>
-                        {{ if $menu_item.HasChildren }}
-                            <li class="sub-heading">
-                                {{ $menu_item.Pre }}
-                            </li>
-                            {{ range (first $menu_item.Limit .Pages) }}
-                                <li class="bullet">
-                                    <a href="{{ .Permalink }}">{{ .Title }}</a>
-                                </li>
-                            {{ end }}
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
-
-                {{/* Check taxonomies */}}
-                {{ range $name, $taxonomy := $taxonomies }}
-                    {{ if eq (lower $name) (lower $menu_item.Name) }}
-                        {{ $matchedSection = true }}
-                        <li class="heading">
-                            <a href="{{$menu_item.URL }}">{{ $menu_item.Name }}</a>
-                        </li>
-                    {{ end }}
-                    {{ range $term, $page := $taxonomy }}
-                        {{ if eq (lower $term) (lower $menu_item.Name) }}
-                            {{ $matchedSection = true }}
-                            <li class="heading">
-                                <a href="{{$menu_item.URL }}">{{ $menu_item.Name }}</a>
-                            </li>
-                            {{ if $menu_item.HasChildren }}
-                                <li class="sub-heading">
-                                    {{ $menu_item.Pre }}
-                                </li>
-                                {{ range (first $menu_item.Limit .Pages) }}
-                                    <li class="bullet">
-                                        <a href="{{ .Permalink }}">{{ .Title }}</a>
-                                    </li>
-                                {{ end }}
-                            {{ end }}
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
-
-                {{/* If no section or taxonomy matched, render as simple link */}}
-                {{ if not $matchedSection }}
-                    <li class="heading">
-                        <a href="{{ $menu_item.URL }}">{{ $menu_item.Name }}</a>
-                    </li>
-                {{ end }}
+                {{/* Internal link - always render as a simple heading with link */}}
+                <li class="heading">
+                    <a href="{{ $menu_item.URL }}">{{ $menu_item.Name }}</a>
+                </li>
             {{ end }}
         {{ end }}
     </ul>
