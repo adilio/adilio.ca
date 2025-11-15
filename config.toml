@@ -20,6 +20,18 @@ pluralizelisttitles = false
         name = "Blog"
         url = "/posts/"
 
+    [[params.menu]]
+        name = "Projects"
+        url = "/projects/"
+
+    [[params.menu]]
+        name = "Apps"
+        url = "/apps/"
+
+    [[params.menu]]
+        name = "Talks"
+        url = "/talks/"
+
     # Social links
     [[params.social]]
         name = "Github"
