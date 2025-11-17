@@ -11,6 +11,10 @@ pluralizelisttitles = false
     brand_image = "/img/adil-cartoon-headshot.png"
     description = "Cloud Solutions Architect · Automation Advocate"
     dark_mode = true
+    github_url = "https://github.com/adilio"
+    twitter_url = "https://twitter.com/adilio"
+    linkedin_url = "https://www.linkedin.com/in/adilio"
+    bluesky_url = "https://bsky.app/profile/adilio.ca"
 
     [[params.menu]]
         Name = "About"
