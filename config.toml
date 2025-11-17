@@ -13,24 +13,24 @@ pluralizelisttitles = false
     dark_mode = true
 
     [[params.menu]]
-        name = "About"
-        url = "/about/"
+        Name = "About"
+        URL = "/about/"
 
     [[params.menu]]
-        name = "Blog"
-        url = "/posts/"
+        Name = "Blog"
+        URL = "/posts/"
 
     [[params.menu]]
-        name = "Projects"
-        url = "/projects/"
+        Name = "Projects"
+        URL = "/projects/"
 
     [[params.menu]]
-        name = "Apps"
-        url = "/apps/"
+        Name = "Apps"
+        URL = "/apps/"
 
     [[params.menu]]
-        name = "Talks"
-        url = "/talks/"
+        Name = "Talks"
+        URL = "/talks/"
 
     # Social links
     [[params.social]]
