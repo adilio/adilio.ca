@@ -1,58 +1,153 @@
-baseURL = "https://adilio.ca"
+baseURL = "https://adilio.ca/"
 languageCode = "en-us"
-theme = "poison"
-pluralizelisttitles = false
+title = "Adil Leghari"
+theme = "PaperMod"
+
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+pluralizeListTitles = false
 
 [pagination]
-    pagerSize = 10
+  pagerSize = 10
+
+[minify]
+  disableXML = true
+  minifyOutput = true
 
 [params]
-    brand = "adilio.ca"
-    brand_image = "/img/adil-cartoon-headshot.png"
-    description = "Cloud Solutions Architect · Automation Advocate"
-    dark_mode = true
-    github_url = "https://github.com/adilio"
-    twitter_url = "https://twitter.com/adilio"
-    linkedin_url = "https://www.linkedin.com/in/adilio"
-    bluesky_url = "https://bsky.app/profile/adilio.ca"
+  env = "production"
+  title = "Adil Leghari"
+  description = "Cloud Solutions Architect · Automation Advocate · Cybersecurity Enthusiast"
+  keywords = ["cloud security", "CNAPP", "automation", "PowerShell", "solutions architect"]
+  author = "Adil Leghari"
+  images = ["/img/adil-cartoon-headshot.png"]
 
-    [[params.menu]]
-        Name = "About"
-        URL = "/about/"
+  defaultTheme = "dark"
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = false
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  hidemeta = false
+  hideSummary = false
+  showtoc = false
 
-    [[params.menu]]
-        Name = "Blog"
-        URL = "/posts/"
+  [params.profileMode]
+    enabled = true
+    title = "Hey, I'm Adil"
+    subtitle = "Cloud Solutions Architect @ Palo Alto Networks | Automation Advocate | Cybersecurity Enthusiast"
+    imageUrl = "/img/adil-cartoon-headshot.png"
+    imageWidth = 160
+    imageHeight = 160
+    imageTitle = "Adil Leghari"
 
-    [[params.menu]]
-        Name = "Projects"
-        URL = "/projects/"
+    [[params.profileMode.buttons]]
+      name = "About"
+      url = "/about/"
 
-    [[params.menu]]
-        Name = "Apps"
-        URL = "/apps/"
+    [[params.profileMode.buttons]]
+      name = "Blog"
+      url = "/posts/"
 
-    [[params.menu]]
-        Name = "Talks"
-        URL = "/talks/"
+    [[params.profileMode.buttons]]
+      name = "Projects"
+      url = "/projects/"
 
-    # Social links
-    [[params.social]]
-        name = "Github"
-        url = "https://github.com/adilio"
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/adilio"
 
-    [[params.social]]
-        name = "Twitter"
-        url = "https://twitter.com/adilio"
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/adilio"
 
-    [[params.social]]
-        name = "LinkedIn"
-        url = "https://www.linkedin.com/in/adilio"
+  [[params.socialIcons]]
+    name = "bluesky"
+    url = "https://bsky.app/profile/adilio.ca"
 
-    [[params.social]]
-        name = "Bluesky"
-        url = "https://bsky.app/profile/adilio.ca"
+  [[params.socialIcons]]
+    name = "x"
+    url = "https://twitter.com/adilio"
+
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:adilio@gmail.com"
+
+  [params.cover]
+    hidden = false
+    hiddenInList = false
+    hiddenInSingle = false
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/posts/"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/projects/"
+    weight = 30
+
+  [[menu.main]]
+    identifier = "apps"
+    name = "Apps"
+    url = "/apps/"
+    weight = 40
+
+  [[menu.main]]
+    identifier = "talks"
+    name = "Talks"
+    url = "/talks/"
+    weight = 50
+
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    url = "/search/"
+    weight = 60
 
 [taxonomies]
-    series = "series"
-    tag = "tags"
+  category = "categories"
+  tag = "tags"
+  series = "series"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    noClasses = false
+    style = "dracula"
+
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
