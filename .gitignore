@@ -1,0 +1,16 @@
+# Hugo build artifacts
+/public/
+/resources/_gen/
+/hugo_stats.json
+/.hugo_build.lock
+
+# Logs
+*.log
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
