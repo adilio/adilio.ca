@@ -115,12 +115,6 @@ pluralizeListTitles = false
     weight = 30
 
   [[menu.main]]
-    identifier = "apps"
-    name = "Apps"
-    url = "/apps/"
-    weight = 40
-
-  [[menu.main]]
     identifier = "talks"
     name = "Talks"
     url = "/talks/"
