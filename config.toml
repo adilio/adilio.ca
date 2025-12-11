@@ -43,7 +43,7 @@ pluralizeListTitles = false
   [params.profileMode]
     enabled = true
     title = "Heya, I'm Adil 👋"
-    subtitle = "Cloud Solutions Architect @ Palo Alto Networks | Automation Advocate | Cybersecurity Enthusiast"
+    subtitle = "Solutions Architect @ Palo Alto Networks | Cybersecurity Enthusiast | Automation Advocate"
     imageUrl = "/img/adil-cartoon-headshot.png"
     imageWidth = 160
     imageHeight = 160
