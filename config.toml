@@ -19,8 +19,8 @@ pluralizeListTitles = false
 [params]
   env = "production"
   title = "Adil Leghari"
-  description = "Cloud Solutions Architect · Automation Advocate · Cybersecurity Enthusiast"
-  keywords = ["cloud security", "CNAPP", "automation", "PowerShell", "solutions architect"]
+  description = "Cloud Solutions Architect · Cybersecurity Enthusiast · Automation Advocate"
+  keywords = ["Cybersecurity", "cloud security", "CNAPP", "automation", "PowerShell", "solutions architect"]
   author = "Adil Leghari"
   images = ["/img/adil-cartoon-headshot.png"]
 
@@ -42,7 +42,7 @@ pluralizeListTitles = false
 
   [params.profileMode]
     enabled = true
-    title = "Hey, I'm Adil"
+    title = "Heya, I'm Adil 👋"
     subtitle = "Cloud Solutions Architect @ Palo Alto Networks | Automation Advocate | Cybersecurity Enthusiast"
     imageUrl = "/img/adil-cartoon-headshot.png"
     imageWidth = 160
