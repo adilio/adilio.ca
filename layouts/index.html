@@ -1,0 +1,68 @@
+{{- define "main" }}
+
+{{- partial "index_profile.html" . }}
+
+{{- $posts    := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+{{- $talks    := (where site.RegularPages "Section" "talks").ByDate.Reverse }}
+{{- $projects := (where site.RegularPages "Section" "projects").ByDate.Reverse }}
+
+{{- if or $posts $talks $projects }}
+<div class="recent-sections">
+
+  {{- if $posts }}
+  <section class="recent-section">
+    <h2 class="recent-section-heading">Recent Posts</h2>
+    <ul class="recent-list">
+      {{- range first 3 $posts }}
+      <li class="recent-item">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <span class="recent-meta">{{ .Date.Format "Jan 2006" }}</span>
+      </li>
+      {{- end }}
+    </ul>
+    <a class="recent-see-all" href="/posts/">All posts →</a>
+  </section>
+  {{- end }}
+
+  {{- if $talks }}
+  <section class="recent-section">
+    <h2 class="recent-section-heading">Talks &amp; Podcasts</h2>
+    <ul class="recent-list">
+      {{- range first 3 $talks }}
+      <li class="recent-item">
+        {{- if .Params.link }}
+        <a href="{{ .Params.link }}" rel="noopener noreferrer">{{ .Title }}</a>
+        {{- else }}
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        {{- end }}
+        <span class="recent-meta">{{ .Date.Format "2006" }}</span>
+      </li>
+      {{- end }}
+    </ul>
+    <a class="recent-see-all" href="/talks/">All talks →</a>
+  </section>
+  {{- end }}
+
+  {{- if $projects }}
+  <section class="recent-section">
+    <h2 class="recent-section-heading">Projects</h2>
+    <ul class="recent-list">
+      {{- range first 3 $projects }}
+      <li class="recent-item">
+        {{- if .Params.link }}
+        <a href="{{ .Params.link }}" rel="noopener noreferrer">{{ .Title }}</a>
+        {{- else }}
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        {{- end }}
+        <span class="recent-meta">{{ .Params.description }}</span>
+      </li>
+      {{- end }}
+    </ul>
+    <a class="recent-see-all" href="/projects/">All projects →</a>
+  </section>
+  {{- end }}
+
+</div>
+{{- end }}
+
+{{- end }}

@@ -1,0 +1,31 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>Projects</h1>
+</header>
+
+{{- range .Pages.ByDate.Reverse }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h2>
+      {{- if .Params.link }}
+      <a href="{{ .Params.link }}" rel="noopener noreferrer" target="_blank">{{ .Title }}</a>
+      {{- else }}
+      {{ .Title }}
+      {{- end }}
+    </h2>
+  </header>
+  {{- if .Params.description }}
+  <div class="entry-content">
+    <p>{{ .Params.description }}</p>
+  </div>
+  {{- end }}
+  {{- if .Params.language }}
+  <footer class="entry-footer">
+    <span>{{ .Params.language }}</span>
+  </footer>
+  {{- end }}
+</article>
+{{- end }}
+
+{{- end }}
