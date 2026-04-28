@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="site-wrapper">
+
+  <header class="page-header">
+    <span class="section-label">{{ .Title }}</span>
+  </header>
+
+  <div class="list-section">
+    {{ if .Pages }}
+    <ul class="item-list" role="list">
+      {{ range .Pages.ByDate.Reverse }}
+      <li class="item-list__item">
+        <span class="item-list__date">{{ .Date.Format "Jan 2006" }}</span>
+        <div>
+          <div class="item-list__title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+          {{ with .Params.dek }}<div class="item-list__dek">{{ . }}</div>{{ end }}
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+    {{ else }}
+    <p class="list-empty">Nothing here yet.</p>
+    {{ end }}
+  </div>
+
+</div>
+{{ end }}

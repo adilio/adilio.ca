@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="site-wrapper">
+
+  <header class="page-header">
+    {{ if .Section }}
+    <span class="section-label">{{ .Section | title }}</span>
+    {{ end }}
+    <h1 class="page-header__title">{{ .Title }}</h1>
+    {{ with .Params.dek }}<p class="page-header__dek">{{ . }}</p>{{ end }}
+    {{ if .Section }}
+    <time class="page-header__date" datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ .Date.Format "January 2, 2006" }}
+    </time>
+    {{ end }}
+  </header>
+
+  <div class="prose-wrap">
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </div>
+
+</div>
+{{ end }}

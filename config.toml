@@ -1,16 +1,16 @@
 baseURL = "https://adilio.ca/"
 languageCode = "en-us"
 title = "Adil Leghari"
-theme = "PaperMod"
 
 enableRobotsTXT = true
 buildDrafts = false
 buildFuture = false
 buildExpired = false
 pluralizeListTitles = false
+disableKinds = ["taxonomy", "term"]
 
 [pagination]
-  pagerSize = 10
+  pagerSize = 20
 
 [minify]
   disableXML = true
@@ -18,82 +18,19 @@ pluralizeListTitles = false
 
 [params]
   env = "production"
-  title = "Adil Leghari"
-  description = "Cloud Solutions Architect · Cybersecurity Enthusiast · Automation Advocate"
-  keywords = ["Cybersecurity", "cloud security", "CNAPP", "automation", "PowerShell", "solutions architect"]
+  description = "Cloud architect. Builder. Security thinker."
   author = "Adil Leghari"
-  images = ["/img/adil-cartoon-headshot.png"]
 
-  defaultTheme = "dark"
-  disableThemeToggle = false
-  ShowReadingTime = true
-  ShowShareButtons = true
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = true
-  ShowCodeCopyButtons = true
-  ShowWordCount = false
-  ShowRssButtonInSectionTermList = true
-  UseHugoToc = true
-  disableSpecial1stPost = false
-  disableScrollToTop = false
-  hidemeta = false
-  hideSummary = false
-  showtoc = false
+  [params.identity]
+    positioning = "I build and secure the infrastructure that organizations depend on."
+    metadata = "Vancouver, BC · Senior Solutioneer @ Wiz"
 
-  [params.profileMode]
-    enabled = true
-    title = "Heya, I'm Adil 👋"
-    subtitle = "Solutions Architect @ Palo Alto Networks | Cybersecurity Enthusiast |<br>Automation Advocate"
-    imageUrl = "/img/adil-cartoon-headshot.png"
-    imageWidth = 160
-    imageHeight = 160
-    imageTitle = "Adil Leghari"
+  [params.currently]
+    text = "Focused on cloud security architecture — helping teams understand their real risk surface and build resilient systems from the ground up."
+    date = "April 2026"
 
-    [[params.profileMode.buttons]]
-      name = "About"
-      url = "/about/"
-
-    [[params.profileMode.buttons]]
-      name = "Blog"
-      url = "/posts/"
-
-    [[params.profileMode.buttons]]
-      name = "Projects"
-      url = "/projects/"
-
-  [[params.socialIcons]]
-    name = "github"
-    url = "https://github.com/adilio"
-
-  [[params.socialIcons]]
-    name = "linkedin"
-    url = "https://www.linkedin.com/in/adilio"
-
-  [[params.socialIcons]]
-    name = "bluesky"
-    url = "https://bsky.app/profile/adilio.ca"
-
-  [[params.socialIcons]]
-    name = "x"
-    url = "https://twitter.com/adilio"
-
-  [[params.socialIcons]]
-    name = "email"
-    url = "mailto:adilio@gmail.com"
-
-  [params.cover]
-    hidden = false
-    hiddenInList = false
-    hiddenInSingle = false
-
-  [params.fuseOpts]
-    isCaseSensitive = false
-    shouldSort = true
-    location = 0
-    distance = 1000
-    threshold = 0.4
-    minMatchCharLength = 0
-    keys = ["title", "permalink", "summary", "content"]
+  [params.about]
+    teaser = "I started in a neuroscience research lab, moved through sysadmin work, package management, and IAM, and now work in cloud security at Wiz. The thread has always been systems — and what happens when they fail."
 
 [menu]
   [[menu.main]]
@@ -103,9 +40,9 @@ pluralizeListTitles = false
     weight = 10
 
   [[menu.main]]
-    identifier = "blog"
-    name = "Blog"
-    url = "/posts/"
+    identifier = "writing"
+    name = "Writing"
+    url = "/writing/"
     weight = 20
 
   [[menu.main]]
@@ -115,24 +52,13 @@ pluralizeListTitles = false
     weight = 30
 
   [[menu.main]]
-    identifier = "talks"
-    name = "Talks"
-    url = "/talks/"
-    weight = 50
-
-  [[menu.main]]
-    identifier = "search"
-    name = "Search"
-    url = "/search/"
-    weight = 60
-
-[taxonomies]
-  category = "categories"
-  tag = "tags"
-  series = "series"
+    identifier = "appearances"
+    name = "Appearances"
+    url = "/appearances/"
+    weight = 40
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS"]
 
 [markup]
   [markup.highlight]
@@ -140,7 +66,7 @@ pluralizeListTitles = false
     guessSyntax = true
     lineNos = false
     noClasses = false
-    style = "dracula"
+    style = "github"
 
   [markup.goldmark]
     [markup.goldmark.renderer]

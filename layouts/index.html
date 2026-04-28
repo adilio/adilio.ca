@@ -1,0 +1,104 @@
+{{ define "main" }}
+<div class="site-wrapper">
+
+  {{/* ── Identity ──────────────────────────────────────── */}}
+  <section class="identity">
+    <h1 class="identity__name">{{ .Site.Title }}</h1>
+    <p class="identity__positioning">{{ .Site.Params.identity.positioning }}</p>
+    <p class="identity__meta">{{ .Site.Params.identity.metadata }}</p>
+  </section>
+
+  {{/* ── Currently ─────────────────────────────────────── */}}
+  {{ with .Site.Params.currently }}
+  <section class="section" aria-label="Currently">
+    <header class="section__header">
+      <span class="section-label">Currently</span>
+    </header>
+    <p class="currently__date">{{ .date }}</p>
+    <p class="currently__text">{{ .text | markdownify }}</p>
+  </section>
+  {{ end }}
+
+  {{/* ── Selected Writing ──────────────────────────────── */}}
+  {{ $writing := where .Site.RegularPages "Section" "writing" }}
+  {{ $recentWriting := first 3 ($writing.ByDate.Reverse) }}
+  {{ if $recentWriting }}
+  <section class="section" aria-labelledby="writing-label">
+    <header class="section__header">
+      <span class="section-label" id="writing-label">Writing</span>
+    </header>
+    <ul class="item-list" role="list">
+      {{ range $recentWriting }}
+      <li class="item-list__item">
+        <span class="item-list__date">{{ .Date.Format "Jan 2006" }}</span>
+        <div>
+          <div class="item-list__title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+          {{ with .Params.dek }}<div class="item-list__dek">{{ . }}</div>{{ end }}
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+    <a href="/writing/" class="view-all-link">All writing →</a>
+  </section>
+  {{ end }}
+
+  {{/* ── Selected Appearances ──────────────────────────── */}}
+  {{ $featuredAppearances := first 2 ((where (where .Site.RegularPages "Section" "appearances") "Params.featured" true).ByDate.Reverse) }}
+  {{ if $featuredAppearances }}
+  <section class="section" aria-labelledby="appearances-label">
+    <header class="section__header">
+      <span class="section-label" id="appearances-label">Appearances</span>
+    </header>
+    <ul class="item-list" role="list">
+      {{ range $featuredAppearances }}
+      <li class="item-list__item">
+        <span class="item-list__date">{{ .Date.Format "2006" }}</span>
+        <div>
+          <div class="item-list__title">
+            {{ if .Params.url }}<a href="{{ .Params.url }}" rel="noopener noreferrer">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ end }}
+          </div>
+          {{ with .Params.venue }}<div class="item-list__dek">{{ . }}</div>{{ end }}
+          {{ with .Params.kind }}<div class="item-list__meta">{{ . }}</div>{{ end }}
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+    <a href="/appearances/" class="view-all-link">All appearances →</a>
+  </section>
+  {{ end }}
+
+  {{/* ── Selected Projects ─────────────────────────────── */}}
+  {{ $featuredProjects := where (where .Site.RegularPages "Section" "projects") "Params.featured" true }}
+  {{ if $featuredProjects }}
+  <section class="section" aria-labelledby="projects-label">
+    <header class="section__header">
+      <span class="section-label" id="projects-label">Projects</span>
+    </header>
+    <ul class="item-list" role="list">
+      {{ range first 3 $featuredProjects }}
+      <li class="item-list__item">
+        <span class="item-list__date">{{ if .Date }}{{ .Date.Format "2006" }}{{ end }}</span>
+        <div>
+          <div class="item-list__title">
+            {{ if .Params.url }}<a href="{{ .Params.url }}" rel="noopener noreferrer">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ end }}
+          </div>
+          {{ with .Params.description }}<div class="item-list__dek">{{ . }}</div>{{ end }}
+          {{ with .Params.language }}<div class="item-list__meta">{{ . }}</div>{{ end }}
+        </div>
+      </li>
+      {{ end }}
+    </ul>
+    <a href="/projects/" class="view-all-link">All projects →</a>
+  </section>
+  {{ end }}
+
+  {{/* ── About Teaser ──────────────────────────────────── */}}
+  {{ with .Site.Params.about }}
+  <section class="about-teaser" aria-label="About">
+    <p class="about-teaser__text">{{ .teaser | markdownify }}</p>
+    <a href="/about/" class="view-all-link">More about Adil →</a>
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}

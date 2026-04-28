@@ -1,0 +1,12 @@
+<header class="site-header">
+  <div class="site-wrapper">
+    <div class="site-header__inner">
+      <a href="/" class="wordmark" aria-label="Adil Leghari — home">{{ .Site.Title }}</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{ end }}
+      </nav>
+    </div>
+  </div>
+</header>
