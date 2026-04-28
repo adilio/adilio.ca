@@ -1,0 +1,7 @@
+# Repositories to exclude from the projects page
+# One repo name per line, comments start with #
+
+adilio.ca
+az-nuke
+gocortexbrokenbank
+banked-timer
