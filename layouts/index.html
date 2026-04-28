@@ -55,10 +55,10 @@
         <span class="item-list__date">{{ .Date.Format "2006" }}</span>
         <div>
           <div class="item-list__title">
-            {{ if .Params.url }}<a href="{{ .Params.url }}" rel="noopener noreferrer">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ end }}
+            {{ if .Params.link }}<a href="{{ .Params.link }}" rel="noopener noreferrer">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ end }}
           </div>
           {{ with .Params.venue }}<div class="item-list__dek">{{ . }}</div>{{ end }}
-          {{ with .Params.kind }}<div class="item-list__meta">{{ . }}</div>{{ end }}
+          {{ with .Params.format }}<div class="item-list__meta">{{ . }}</div>{{ end }}
         </div>
       </li>
       {{ end }}
@@ -80,7 +80,7 @@
         <span class="item-list__date">{{ if .Date }}{{ .Date.Format "2006" }}{{ end }}</span>
         <div>
           <div class="item-list__title">
-            {{ if .Params.url }}<a href="{{ .Params.url }}" rel="noopener noreferrer">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ end }}
+            {{ if .Params.link }}<a href="{{ .Params.link }}" rel="noopener noreferrer">{{ .Title }}</a>{{ else }}<a href="{{ .Permalink }}">{{ .Title }}</a>{{ end }}
           </div>
           {{ with .Params.description }}<div class="item-list__dek">{{ . }}</div>{{ end }}
           {{ with .Params.language }}<div class="item-list__meta">{{ . }}</div>{{ end }}

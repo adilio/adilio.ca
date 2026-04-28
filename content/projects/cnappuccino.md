@@ -2,7 +2,7 @@
 title: "CNAPPuccino"
 date: 2023-06-01
 description: "A CNAPP lab-in-a-box for demos and workshops on cloud security posture."
-url: "https://github.com/adilio/cnappuccino"
+link: "https://github.com/adilio/cnappuccino"
 language: "Go"
 featured: true
 tags: ["cloud", "security"]
