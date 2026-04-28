@@ -86,6 +86,10 @@ Same cascade as talks — no individual pages rendered.
 
 Profile block is configured in `config.toml` under `[params.profileMode]`.
 
+## Memory
+
+- [No Claude attribution](memory/feedback_no-claude-attribution.md) — Never commit with Co-Authored-By or AI attribution
+
 ## Owner details
 
 - **Name:** Adil Leghari

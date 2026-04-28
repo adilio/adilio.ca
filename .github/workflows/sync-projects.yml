@@ -1,0 +1,29 @@
+name: Sync GitHub Projects
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight UTC
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch projects from GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ./scripts/sync-github-projects.sh
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/projects/
+          git diff --staged --quiet || git commit -m "chore: sync projects from GitHub"
+          git push

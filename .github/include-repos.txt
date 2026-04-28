@@ -1,0 +1,6 @@
+# Repositories to always include in projects page
+# One repo name per line, comments start with #
+# These will be added regardless of recency or other filters
+
+# Example: qrcheck
+# Example: cnappuccino
