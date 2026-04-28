@@ -1,0 +1,33 @@
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>Talks &amp; Podcasts</h1>
+</header>
+
+{{- range .Pages.ByDate.Reverse }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h2>
+      {{- if .Params.link }}
+      <a href="{{ .Params.link }}" rel="noopener noreferrer" target="_blank">{{ .Title }}</a>
+      {{- else }}
+      {{ .Title }}
+      {{- end }}
+    </h2>
+  </header>
+  {{- if or .Params.venue .Params.format }}
+  <div class="entry-content">
+    <p>
+      {{- if .Params.venue }}{{ .Params.venue }}{{ end }}
+      {{- if and .Params.venue .Params.format }} &middot; {{ end }}
+      {{- if .Params.format }}{{ .Params.format }}{{ end }}
+    </p>
+  </div>
+  {{- end }}
+  <footer class="entry-footer">
+    <span>{{ .Date.Format "January 2006" }}</span>
+  </footer>
+</article>
+{{- end }}
+
+{{- end }}
