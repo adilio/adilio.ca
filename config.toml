@@ -1,6 +1,6 @@
 baseURL = "https://adilio.ca/"
 languageCode = "en-us"
-title = "Adil Leghari"
+title = "Adilio.ca"
 theme = "PaperMod"
 
 enableRobotsTXT = true
@@ -18,7 +18,7 @@ pluralizeListTitles = false
 
 [params]
   env = "production"
-  title = "Adil Leghari"
+  title = "Adilio.ca"
   description = "Cloud Solutions Architect · Cybersecurity Enthusiast · Automation Advocate"
   keywords = ["Cybersecurity", "cloud security", "CNAPP", "automation", "PowerShell", "solutions architect"]
   author = "Adil Leghari"
@@ -43,7 +43,7 @@ pluralizeListTitles = false
   [params.profileMode]
     enabled = true
     title = "Heya, I'm Adil 👋"
-    subtitle = "Senior Solutioneer @ Wiz | Cybersecurity Enthusiast |<br>Automation Advocate"
+    subtitle = "Senior Solutioneer @ Wiz<br>Cybersecurity Enthusiast<br>Automation Advocate"
     imageUrl = "/img/adil-cartoon-headshot.png"
     imageWidth = 160
     imageHeight = 160
@@ -76,10 +76,6 @@ pluralizeListTitles = false
   [[params.socialIcons]]
     name = "x"
     url = "https://twitter.com/adilio"
-
-  [[params.socialIcons]]
-    name = "email"
-    url = "mailto:adilio@gmail.com"
 
   [params.cover]
     hidden = false

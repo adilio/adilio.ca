@@ -94,6 +94,5 @@ Profile block is configured in `config.toml` under `[params.profileMode]`.
 
 - **Name:** Adil Leghari
 - **Role:** Senior Solutioneer @ Wiz
-- **Email:** adilio@gmail.com
 - **GitHub:** adilio
 - **Bluesky:** adilio.ca

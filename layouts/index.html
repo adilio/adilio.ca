@@ -1,5 +1,6 @@
 {{- define "main" }}
 
+<div class="home-layout">
 {{- partial "index_profile.html" . }}
 
 {{- $posts    := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
@@ -64,5 +65,7 @@
 
 </div>
 {{- end }}
+
+</div>
 
 {{- end }}
