@@ -1,6 +1,6 @@
 ---
 title: "qrcheck"
-date: 2026-05-22
+date: 2026-05-26
 description: "A QR Code Scanner, so you won't YOLO your security"
 link: "https://github.com/adilio/qrcheck"
 language: "JavaScript, HTML, TypeScript, Svelte, CSS"
