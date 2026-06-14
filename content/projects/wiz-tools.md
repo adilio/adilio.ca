@@ -1,6 +1,6 @@
 ---
 title: "wiz-tools"
-date: 2026-06-11
+date: 2026-06-13
 description: "A collection of useful tooling for working with Wiz"
 link: "https://github.com/adilio/wiz-tools"
 language: "HTML, PowerShell, Python"
