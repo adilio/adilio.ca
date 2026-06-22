@@ -1,9 +1,9 @@
 ---
 title: "wiz-sizing"
-date: 2026-06-20
+date: 2026-06-21
 description: "A simple TUI designed to simplify resource discovery"
 link: "https://github.com/adilio/wiz-sizing"
-language: "Python, Shell, PowerShell"
+language: "Python, PowerShell"
 ---
 
-A simple TUI designed to simplify resource discovery...
+Self-contained, **curl-able** sizing scripts — one file per cloud. Open your cloud's CloudShell, paste one line, and you're sizing in seconds. No install, no build, no tree to navigate: what's in the repo is exactly what you run. | File | Run it in | Modes | |---|---|---| | `wi...
