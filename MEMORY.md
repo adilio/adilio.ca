@@ -36,8 +36,6 @@ assets/css/extended/
   recent-sections.css     # Additional CSS for homepage recent-list sections
 static/
   img/                    # adil-cartoon-headshot.png (used in PaperMod profileMode)
-data/
-  projects.json           # LEGACY — migrated to content/projects/; can be ignored
 themes/PaperMod/          # Git submodule — empty until initialised
 ```
 
@@ -55,7 +53,7 @@ link: "https://youtube.com/watch?v=..."   # NOTE: cannot use "url" (Hugo reserve
 ---
 ```
 
-Individual talk pages are NOT rendered (`build: render: never` cascaded from `_index.md`). They appear in lists only; card titles link directly to the external URL.
+In practice, talks appear in the `/talks/` list only and card titles link directly to the external URL. NOTE: there is currently **no** `build: render: never` cascade in `content/talks/_index.md` (it holds only a title), so Hugo still generates individual `/talks/<slug>/` pages — they are simply unlinked. Add the cascade if you want them suppressed. See "Deferred cleanups" below.
 
 ### Projects (`content/projects/*.md`)
 
@@ -69,7 +67,7 @@ language: "Go"
 ---
 ```
 
-Same cascade as talks — no individual pages rendered.
+Same situation as talks — and note `content/projects/` has **no `_index.md` at all**, so there is no cascade here either. Individual pages are generated but unlinked.
 
 ## Key gotchas
 
@@ -85,6 +83,23 @@ Same cascade as talks — no individual pages rendered.
 2. Shows three recent-item lists: Recent Posts (`/posts/`), Talks & Podcasts (`/talks/`), Projects (`/projects/`)
 
 Profile block is configured in `config.toml` under `[params.profileMode]`.
+
+## Deferred cleanups / YAGNI notes
+
+Low-priority findings from a YAGNI review. Documented, not acted on — pick up if/when relevant.
+
+- **Unused `series` taxonomy** — `config.toml` registers `series` alongside `category`/`tag`, but no content uses it. Pre-provisioning for content that doesn't exist; remove it (or add it the day you write a series).
+- **Missing render cascade** — the "Content model" section above used to claim talks/projects suppress individual pages via `build: render: never`. That cascade does **not** exist (talks `_index.md` has only a title; projects has no `_index.md`). Either add the cascade to actually suppress those pages, or leave them unlinked as-is. Decide intentionally.
+- **Defensive permalink fallbacks** — `layouts/index.html`, `talks/list.html`, and `projects/list.html` each carry an `{{ else }}<a href="{{ .Permalink }}">` branch for items with no `link:`. Every talk/project currently has a `link:`, so these never fire. Cheap and harmless; kept on purpose.
+- **`scripts/test.sh` fallback ladder** — local Hugo → Docker, plus `REQUIRE_HUGO_BUILD` / `BUILD_DIR` / `HUGO_VERSION` knobs. More configurability than a one-person site strictly needs, but self-contained and genuinely useful across local/CI/no-Hugo. Kept on purpose. (The `OLD_DOMAIN_PART1`/`PART2` split is **required** — it stops the script matching its own domain-check pattern. Don't "simplify" it.)
+
+### Dependency notes (YAGNI)
+
+This site has essentially **no dependency tree** — no `package.json`/`node_modules`/`go.mod`, no vendored libs. The whole surface is Hugo + the pinned PaperMod submodule + standard Unix CLIs. Keep it that way; resist adding.
+
+- **Don't reinvent:** Hugo, PaperMod, and `jq` are load-bearing. Hand-rolling base templates/search/syntax-highlighting (PaperMod) or parsing GitHub JSON in pure bash (jq) would be *more* code, not less — the DIY-bloat trap.
+- **Free in CI, keep:** `gh` CLI (2 API calls; pre-installed on GitHub Actions runners — not worth rewriting as `curl`). `docker`/`rg` in `test.sh` are optional fallbacks.
+- **Reducible:** `scripts/sync-github-projects.sh:45` shells out to **perl** (`perl -pe 's/\s+/ /g'`) for one whitespace squeeze. Lines 44–45 collapse to a single `tr -s '[:space:]' ' '` (tool already in the pipeline), dropping the perl dependency entirely. Not yet applied.
 
 ## Memory
 
