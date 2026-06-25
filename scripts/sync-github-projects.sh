@@ -3,7 +3,6 @@
 set -e
 
 EXCLUDED_FILE=".github/excluded-repos.txt"
-INCLUDED_FILE=".github/include-repos.txt"
 MAX_PROJECTS=10
 
 # Read excluded repos into array
@@ -16,18 +15,8 @@ if [ -f "$EXCLUDED_FILE" ]; then
   done < "$EXCLUDED_FILE"
 fi
 
-# Read included repos into array
-INCLUDED=()
-if [ -f "$INCLUDED_FILE" ]; then
-  while IFS= read -r line; do
-    [[ "$line" =~ ^#.*$ ]] && continue
-    [[ -z "$line" ]] && continue
-    INCLUDED+=("$line")
-  done < "$INCLUDED_FILE"
-fi
-
 # Fetch all PUBLIC repositories for adilio
-gh repo list adilio --limit 100 --json name,description,updatedAt,url,languages,stargazerCount,visibility | \
+gh repo list adilio --limit 100 --json name,description,updatedAt,url,languages,visibility | \
   jq -r 'sort_by(.updatedAt) | reverse | .[] | select(.visibility == "PUBLIC") | @json' > /tmp/repos.json
 
 # Clear existing project files (keep _index.md)
@@ -76,38 +65,12 @@ EOF
   return 0
 }
 
-# First, generate any included repos
+# Generate the most recently updated repos, up to MAX_PROJECTS
 count=0
-if [ ${#INCLUDED[@]} -gt 0 ]; then
-  for repo_name in "${INCLUDED[@]}"; do
-    [ "$count" -ge "$MAX_PROJECTS" ] && break
-
-    # Check if excluded (exclusion takes precedence)
-    for excluded in "${EXCLUDED[@]}"; do
-      if [[ "$repo_name" == *"$excluded"* ]]; then
-        continue 2
-      fi
-    done
-
-    # Fetch this specific repo's data
-    if repo_data=$(gh repo view adilio/"$repo_name" --json name,description,updatedAt,url,languages,stargazerCount,visibility --jq 'select(.visibility == "PUBLIC")' 2>/dev/null); then
-      if [ -n "$repo_data" ]; then
-        if generate_project "$repo_data"; then
-          count=$((count + 1))
-        fi
-      fi
-    fi
-  done
-fi
-
-# Then fill the rest with most recently updated
 while IFS= read -r repo; do
   [ "$count" -ge "$MAX_PROJECTS" ] && break
 
   NAME=$(echo "$repo" | jq -r '.name')
-
-  # Skip if already included (check if file exists)
-  [ -f "content/projects/${NAME}.md" ] && continue
 
   # Check if excluded
   for excluded in "${EXCLUDED[@]}"; do
