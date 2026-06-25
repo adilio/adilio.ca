@@ -99,7 +99,7 @@ This site has essentially **no dependency tree** — no `package.json`/`node_mod
 
 - **Don't reinvent:** Hugo, PaperMod, and `jq` are load-bearing. Hand-rolling base templates/search/syntax-highlighting (PaperMod) or parsing GitHub JSON in pure bash (jq) would be *more* code, not less — the DIY-bloat trap.
 - **Free in CI, keep:** `gh` CLI (2 API calls; pre-installed on GitHub Actions runners — not worth rewriting as `curl`). `docker`/`rg` in `test.sh` are optional fallbacks.
-- **Reducible:** `scripts/sync-github-projects.sh:45` shells out to **perl** (`perl -pe 's/\s+/ /g'`) for one whitespace squeeze. Lines 44–45 collapse to a single `tr -s '[:space:]' ' '` (tool already in the pipeline), dropping the perl dependency entirely. Not yet applied.
+- **Removed:** `scripts/sync-github-projects.sh` previously shelled out to **perl** (`perl -pe 's/\s+/ /g'`) for one whitespace squeeze. Replaced with `tr -s '[:space:]' ' '` (tool already in the pipeline), dropping the perl dependency entirely.
 
 ## Memory
 

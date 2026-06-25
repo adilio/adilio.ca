@@ -41,8 +41,7 @@ generate_project() {
   if README=$(gh api "repos/adilio/$NAME/readme" --jq '.content' 2>/dev/null); then
     LONG_DESC=$(echo "$README" | base64 -d 2>/dev/null | tr '\r' '\n' | \
       awk '/^## / {exit} /^> / {next} /^[^#\[]/ {print}' | \
-      tr '\n' ' ' | \
-      perl -pe 's/\s+/ /g' | \
+      tr -s '[:space:]' ' ' | \
       cut -c1-280 | \
       sed 's/ *$//' | sed 's/$/.../')
   fi
