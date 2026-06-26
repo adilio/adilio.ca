@@ -1,6 +1,6 @@
 ---
 title: "wiz-sizing"
-date: 2026-06-22
+date: 2026-06-25
 description: "A TUI designed to simplify resource discovery"
 link: "https://github.com/adilio/wiz-sizing"
 language: "Python, PowerShell"
