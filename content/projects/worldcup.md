@@ -1,6 +1,6 @@
 ---
 title: "worldcup"
-date: 2026-07-03
+date: 2026-07-04
 description: "4dl World Cup Tracker app"
 link: "https://github.com/adilio/worldcup"
 language: "HTML, TypeScript, JavaScript, CSS"
