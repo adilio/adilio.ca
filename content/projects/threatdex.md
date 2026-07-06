@@ -1,9 +1,9 @@
 ---
 title: "threatdex"
-date: 2026-07-04
+date: 2026-07-05
 description: "ThreatDex - Know your adversaries. The APT trading card encyclopedia. Gotta know ‘em all!"
 link: "https://github.com/adilio/threatdex"
-language: "TypeScript, CSS, PLpgSQL, JavaScript, Python"
+language: "TypeScript, CSS, PLpgSQL, JavaScript"
 ---
 
 ThreatDex turns dry APT intelligence into interactive trading cards — making threat actor research faster, more visual, and actually kind of fun. Browse, filter, and collect intelligence on the world's most dangerous cyber threat actors, sourced nightly from MITRE ATT&CK, ETDA,...
