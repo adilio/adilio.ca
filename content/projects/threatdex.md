@@ -1,6 +1,6 @@
 ---
 title: "threatdex"
-date: 2026-07-05
+date: 2026-07-14
 description: "ThreatDex - Know your adversaries. The APT trading card encyclopedia. Gotta know ‘em all!"
 link: "https://github.com/adilio/threatdex"
 language: "TypeScript, CSS, PLpgSQL, JavaScript"

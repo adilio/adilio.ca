@@ -1,6 +1,6 @@
 ---
 title: "PSCumulus"
-date: 2026-07-05
+date: 2026-07-14
 description: "Cross-Cloud PowerShell Module (Azure, AWS, GCP)"
 link: "https://github.com/adilio/PSCumulus"
 language: "PowerShell"
