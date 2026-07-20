@@ -5,6 +5,13 @@ set -e
 EXCLUDED_FILE=".github/excluded-repos.txt"
 MAX_PROJECTS=10
 
+# Emit a value as a double-quoted YAML scalar with quotes/backslashes escaped.
+# YAML is a JSON superset, so jq's JSON string encoding is valid frontmatter and
+# keeps a stray " in a repo description from breaking the Hugo build.
+yaml_str() {
+  jq -n --arg s "$1" '$s'
+}
+
 # Read excluded repos into array
 EXCLUDED=()
 if [ -f "$EXCLUDED_FILE" ]; then
@@ -50,11 +57,11 @@ generate_project() {
 
   cat > "content/projects/${NAME}.md" << EOF
 ---
-title: "$NAME"
+title: $(yaml_str "$NAME")
 date: $DATE
-description: "$DESCRIPTION"
-link: "$URL"
-language: "${LANGUAGES:-Unknown}"
+description: $(yaml_str "$DESCRIPTION")
+link: $(yaml_str "$URL")
+language: $(yaml_str "${LANGUAGES:-Unknown}")
 ---
 
 ${LONG_DESC}
