@@ -1,6 +1,6 @@
 ---
 title: "PromptStash"
-date: 2026-07-16
+date: 2026-07-20
 description: "A place to store and organize your LLM prompts"
 link: "https://github.com/adilio/PromptStash"
 language: "JavaScript, HTML, TypeScript, CSS, PLpgSQL"
