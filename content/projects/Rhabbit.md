@@ -1,6 +1,6 @@
 ---
 title: "Rhabbit"
-date: 2026-07-22
+date: 2026-07-23
 description: "Habit tracker app, one hop  at a time"
 link: "https://github.com/adilio/Rhabbit"
 language: "HTML, TypeScript, CSS"
