@@ -5,7 +5,8 @@
     {{- partial "index_profile.html" . }}
   </section>
 
-  {{- with hugo.Data.featured_apps }}
+  {{- $featuredApps := resources.Get "data/featured_apps.yaml" | transform.Unmarshal }}
+  {{- with $featuredApps }}
   <section class="app-shelf" aria-labelledby="app-shelf-heading">
     <div class="section-intro">
       <div>
