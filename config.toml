@@ -24,7 +24,7 @@ pluralizeListTitles = false
   author = "Adil Leghari"
   images = ["/img/adil-cartoon-headshot.png"]
 
-  defaultTheme = "dark"
+  defaultTheme = "auto"
   disableThemeToggle = false
   ShowReadingTime = true
   ShowShareButtons = true
@@ -109,6 +109,12 @@ pluralizeListTitles = false
     name = "Projects"
     url = "/projects/"
     weight = 30
+
+  [[menu.main]]
+    identifier = "apps"
+    name = "4dl Apps"
+    url = "https://4dl.ca/"
+    weight = 40
 
   [[menu.main]]
     identifier = "talks"

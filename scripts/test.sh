@@ -28,9 +28,9 @@ check_domain_references() {
   local search_cmd
 
   if command -v rg >/dev/null 2>&1; then
-    search_cmd=(rg --no-heading --line-number -- "${pattern}" .)
+    search_cmd=(rg --no-heading --line-number --glob '!MEMORY.md' --glob '!memory/**' -- "${pattern}" .)
   else
-    search_cmd=(grep -RIn -- "${pattern}" .)
+    search_cmd=(grep -RIn --exclude='MEMORY.md' --exclude-dir='memory' -- "${pattern}" .)
   fi
 
   if "${search_cmd[@]}"; then

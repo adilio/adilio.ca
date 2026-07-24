@@ -1,0 +1,29 @@
+- title: QRCheck
+  blurb: See where a QR code actually goes before you tap it. Private, local decoding with practical security checks.
+  url: https://qrcheck.ca
+  domain: qrcheck.ca
+  accent: "#2563eb"
+  tags: [security, privacy, tools]
+  icon: /img/4dl/icons/qrcheck.png
+  shot: /img/4dl/shots/qrcheck.webp
+  alt: QRCheck interface with camera and upload options for checking a QR code safely.
+
+- title: Rhabbit
+  blurb: A calm, private habit tracker with forgiving streaks, one-tap logging, and progress that encourages instead of punishes.
+  url: https://rhabbit.4dl.ca
+  domain: rhabbit.4dl.ca
+  accent: "#5e86a4"
+  tags: [habits, health, pwa]
+  icon: /img/4dl/icons/rhabbit.svg
+  shot: /img/4dl/shots/rhabbit.webp
+  alt: Rhabbit sign-in screen with its rabbit mark and illustrated burrow.
+
+- title: PromptStash
+  blurb: Save, organize, and share the prompts worth keeping, with folders, tags, search, history, and collaboration.
+  url: https://promptstash.4dl.ca
+  domain: promptstash.4dl.ca
+  accent: "#5268a1"
+  tags: [ai, productivity, teams]
+  icon: /img/4dl/icons/promptstash.svg
+  shot: /img/4dl/shots/promptstash.webp
+  alt: PromptStash welcome screen with email, Google, and GitHub sign-in options.

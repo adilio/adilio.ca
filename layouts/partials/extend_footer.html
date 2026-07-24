@@ -1,0 +1,63 @@
+<script>
+  (function () {
+    const original = document.getElementById("theme-toggle");
+    if (!original) return;
+
+    const options = [
+      {
+        value: "system",
+        label: "Match system",
+        icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.8" y="2.6" width="12.4" height="8.6" rx="1.4"></rect><path d="M6 14h4"></path></svg>'
+      },
+      {
+        value: "light",
+        label: "Light",
+        icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3.1"></circle><path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.95 3.05l-1.13 1.13M4.18 11.82l-1.13 1.13M12.95 12.95l-1.13-1.13M4.18 4.18L3.05 3.05"></path></svg>'
+      },
+      {
+        value: "dark",
+        label: "Dark",
+        icon: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.6A5.8 5.8 0 0 1 6.4 2.5a5.8 5.8 0 1 0 7.1 7.1z"></path></svg>'
+      }
+    ];
+
+    const control = document.createElement("fieldset");
+    control.className = "theme-picker";
+    control.innerHTML = '<legend class="visually-hidden">Color theme</legend>' + options.map(function (option) {
+      return '<label class="theme-picker-option" title="' + option.label + '">' +
+        '<input type="radio" name="site-theme" value="' + option.value + '">' +
+        option.icon + '<span class="visually-hidden">' + option.label + '</span></label>';
+    }).join("");
+    original.insertAdjacentElement("afterend", control);
+
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const inputs = Array.from(control.querySelectorAll("input"));
+
+    function preference() {
+      const stored = localStorage.getItem("pref-theme");
+      return stored === "light" || stored === "dark" ? stored : "system";
+    }
+
+    function apply(value) {
+      if (value === "system") {
+        localStorage.removeItem("pref-theme");
+        document.documentElement.dataset.theme = media.matches ? "dark" : "light";
+      } else {
+        localStorage.setItem("pref-theme", value);
+        document.documentElement.dataset.theme = value;
+      }
+      inputs.forEach(function (input) {
+        input.checked = input.value === value;
+        input.parentElement.dataset.checked = String(input.checked);
+      });
+    }
+
+    inputs.forEach(function (input) {
+      input.addEventListener("change", function () { apply(input.value); });
+    });
+    media.addEventListener("change", function () {
+      if (preference() === "system") apply("system");
+    });
+    apply(preference());
+  })();
+</script>
