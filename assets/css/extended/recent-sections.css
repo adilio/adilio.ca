@@ -465,6 +465,28 @@ button#theme-toggle {
     text-decoration: none;
 }
 
+.about-socials {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.about-socials .social-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.about-socials .social-icons a {
+    color: var(--secondary);
+    transition: color 150ms var(--shelf-ease), transform 150ms var(--shelf-ease);
+}
+
+.about-socials .social-icons a:hover {
+    color: var(--kiln-deep);
+    transform: translateY(-2px);
+}
+
 @media (max-width: 900px) {
     .featured-app-grid,
     .recent-sections {
@@ -522,7 +544,8 @@ button#theme-toggle {
     .home-hero .profile img,
     .featured-app-card,
     .featured-app-shot img,
-    .home-hero .button {
+    .home-hero .button,
+    .about-socials .social-icons a {
         transition: none;
     }
 }
