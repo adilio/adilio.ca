@@ -15,7 +15,7 @@ After UBC, I worked on package management and artifact security at [Chocolatey](
 
 I co-founded the Pacific Northwest PowerShell User Group and co-hosted BridgeConf. I also speak at conferences and write about PowerShell, automation, cloud, and security.
 
-Outside of work, I build apps and side projects of questionable utility, collect far too many stickers, fuss over travel tech, and snowboard. I also spend a lot of time trying to explain cybersecurity without turning it into jargon. Security is more useful when people actually understand it.
+Outside of work, I like building [4dl apps](https://4dl.ca/) and other side projects of questionable utility, collecting far too many stickers, fussing over travel tech, and snowboarding. I also spend a lot of time trying to explain cybersecurity without turning it into jargon. Security is more useful when people actually understand it.
 
 ---
 
