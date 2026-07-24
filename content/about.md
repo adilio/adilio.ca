@@ -3,7 +3,7 @@ title: "About"
 date: 2022-02-05
 ---
 
-Heya! 👋 I'm Adil.
+Heya! 👋🏽 I'm Adil.
 
 My tech origin story starts in a [neuroscience research lab](https://attention.psych.ubc.ca/), where managing servers between experiments gradually became my actual job. I ended up with a few published papers and an equal appreciation for both the brains we studied and the machines we used to study them. The machines were just easier to reboot when something went wrong, and had better documentation.
 
