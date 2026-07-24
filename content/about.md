@@ -7,15 +7,15 @@ disableShare: true
 
 Heya! 👋🏼 I'm Adil.
 
-My tech origin story starts in a [neuroscience research lab](https://attention.psych.ubc.ca/), where managing servers between experiments gradually became my actual job. I ended up with a few published papers and an equal appreciation for both the brains we studied and the machines we used to study them. The machines were just easier to reboot when something went wrong, and had better documentation.
+I started out in a [neuroscience research lab](https://attention.psych.ubc.ca/) at UBC. I was supposed to be helping run experiments, but I kept ending up responsible for the servers. Eventually, that became the job. I left with a few published papers and an appreciation for both the brains we studied and the machines we used to study them. The machines were easier to reboot when something went wrong, and they had better documentation.
 
-From there I landed at [The University of British Columbia](https://www.ubc.ca/) as a sysadmin, where I discovered PowerShell and never quite recovered. I spent over a decade there, automating anything I had to do more than twice. Somewhere along the way I realized the job wasn't really about fixing things. It was about building automated, resilient systems that let me sleep through the night.
+I moved into a sysadmin role at [The University of British Columbia](https://www.ubc.ca/) and stayed for more than a decade. That is where I got deep into PowerShell and started automating the repetitive parts of the job. I liked solving problems once and building systems that meant fewer late-night calls.
 
-From there, things got interesting. I went deep into package management and artifact security at [Chocolatey](https://chocolatey.org/) and [Cloudsmith](https://cloudsmith.com/). If you ever want to hear my thoughts on dependency management, bring snacks. Then I moved into IAM (Identity and Access Management) at [Okta](https://www.okta.com/), where I learned to speak fluent SAML and developed opinions about token lifetimes that I mostly keep to myself. Now I'm a Senior Solutions Engineer at [Wiz](https://www.wiz.io/), helping organizations understand and reduce cloud risk. It feels like a natural landing spot after years spent thinking about supply chains, identity, infrastructure, and all the creative ways things can go sideways.
+After UBC, I worked on package management and artifact security at [Chocolatey](https://chocolatey.org/) and [Cloudsmith](https://cloudsmith.com/), then moved into identity at [Okta](https://www.okta.com/). Today I'm a Senior Solutions Engineer at [Wiz](https://www.wiz.io/), helping customers solve cloud security problems. These jobs sound different on paper, but they all involve figuring out how systems fail and helping people make them safer.
 
-I co-founded the Pacific Northwest PowerShell User Group, co-hosted BridgeConf, and somehow became someone who speaks at conferences and writes about this stuff. It still surprises me, honestly.
+I co-founded the Pacific Northwest PowerShell User Group and co-hosted BridgeConf. I also speak at conferences and write about PowerShell, automation, cloud, and security.
 
-Outside of work, I build apps and side projects of questionable utility, maintain a sticker collection that has exceeded reasonable bounds, obsess over travel tech, and snowboard. I'm also passionate about making cybersecurity accessible for everyone. Security works better when everyone understands it, and gatekeeping helps no one.
+Outside of work, I build apps and side projects of questionable utility, collect far too many stickers, fuss over travel tech, and snowboard. I also spend a lot of time trying to explain cybersecurity without turning it into jargon. Security is more useful when people actually understand it.
 
 ---
 
