@@ -1,0 +1,43 @@
+{{- define "main" }}
+
+<article class="project-detail" style="--project-accent: {{ .Params.accent | default "#b1603a" }}">
+  <a class="project-back" href="/projects/"><span aria-hidden="true">←</span> All projects</a>
+
+  <header class="project-detail-header">
+    <div class="project-detail-title">
+      {{- with .Params.icon }}<img class="project-detail-icon" src="{{ . }}" alt="" width="64" height="64" />{{- end }}
+      <div>
+        <p class="project-detail-type">{{ .Params.project_type | default "Project" }}{{ with .Params.status }} · {{ . }}{{ end }}</p>
+        <h1>{{ .Title }}</h1>
+      </div>
+    </div>
+    <p class="project-detail-lede">{{ .Params.description }}</p>
+    <div class="project-detail-actions">
+      {{- with .Params.external_url }}
+      <a class="project-action project-action-primary" href="{{ . }}" target="_blank" rel="noopener noreferrer">Open {{ $.Title }} <span aria-hidden="true">↗</span></a>
+      {{- end }}
+      {{- with .Params.repo }}
+      <a class="project-action" href="{{ . }}" target="_blank" rel="noopener noreferrer">View source <span aria-hidden="true">↗</span></a>
+      {{- end }}
+    </div>
+  </header>
+
+  {{- with .Params.shot }}
+  <figure class="project-detail-shot">
+    <img src="{{ . }}" alt="{{ $.Params.shot_alt }}" width="{{ $.Params.shot_width | default 840 }}" height="{{ $.Params.shot_height | default 840 }}" />
+  </figure>
+  {{- end }}
+
+  <div class="project-detail-body">
+    <dl class="project-facts" aria-label="Project details">
+      {{- with .Params.status }}<div><dt>Status</dt><dd>{{ . }}</dd></div>{{- end }}
+      {{- with .Params.language }}<div><dt>Built with</dt><dd>{{ . }}</dd></div>{{- end }}
+      {{- with .Date }}<div><dt>Last updated</dt><dd>{{ .Format "January 2006" }}</dd></div>{{- end }}
+    </dl>
+    <div class="project-story post-content">
+      {{ .Content }}
+    </div>
+  </div>
+</article>
+
+{{- end }}

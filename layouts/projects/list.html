@@ -1,31 +1,89 @@
 {{- define "main" }}
 
-<header class="page-header">
-  <h1>Projects</h1>
-</header>
+{{/*
+THESIS: A walkable project corridor makes the work itself the introduction and refuses the undifferentiated repository grid.
+OWN-WORLD: Cool paper surfaces, kiln-orange wayfinding, Bricolage headlines, Hyperlegible body copy, crisp rules, and image-led frames.
+STORY: Visitors see the range, inspect a few defining projects, then filter the full body of work and open an internal detail page.
+FIRST VIEWPORT: A compact editorial introduction sits above a wide horizontal reel; the first project enters oversized and the next remains visibly within reach.
+FORM: Exhibition corridor, sixth in the grounded structure set, staged as a scroll-snap rail with a quiet catalog below; seed 4153a4ad.
+*/}}
 
-{{- range .Pages.ByDate.Reverse }}
-<article class="post-entry">
-  <header class="entry-header">
-    <h2>
-      {{- if .Params.link }}
-      <a href="{{ .Params.link }}" rel="noopener noreferrer" target="_blank">{{ .Title }}</a>
-      {{- else }}
-      {{ .Title }}
-      {{- end }}
-    </h2>
+{{- $projectPages := .RegularPagesRecursive }}
+{{- $projects := $projectPages.ByParam "order" }}
+{{- $featured := where $projects "Params.featured" true }}
+
+<div class="projects-showcase">
+  <header class="projects-hero">
+    <p class="section-kicker">Selected work &amp; useful detours</p>
+    <div class="projects-hero-grid">
+      <h1>Things I’ve made, shipped, and kept tinkering with.</h1>
+      <p>Apps from <a href="https://4dl.ca/">4dl</a>, security tools, open-source utilities, and experiments born from problems that would not leave me alone.</p>
+    </div>
   </header>
-  {{- if .Summary }}
-  <div class="entry-content">
-    <p>{{ .Summary }}</p>
-  </div>
+
+  {{- with $featured }}
+  <section class="project-corridor" aria-labelledby="featured-projects-heading">
+    <div class="project-corridor-head">
+      <h2 id="featured-projects-heading">Start here</h2>
+      <div class="corridor-controls" aria-label="Featured project controls">
+        <button type="button" class="corridor-button" data-corridor-prev aria-label="Previous project">←</button>
+        <button type="button" class="corridor-button" data-corridor-next aria-label="Next project">→</button>
+      </div>
+    </div>
+
+    <div class="project-reel" data-project-reel tabindex="0" aria-label="Featured projects">
+      {{- range $index, $project := . }}
+      <article class="project-panel" style="--project-accent: {{ .Params.accent | default "#b1603a" }}">
+        <a class="project-panel-link" href="{{ .RelPermalink }}" aria-label="Explore {{ .Title }}"></a>
+        <div class="project-panel-copy">
+          <div class="project-panel-meta">
+            <span>{{ .Params.project_type | default "Project" }}</span>
+            {{- with .Params.status }}<span>{{ . }}</span>{{- end }}
+          </div>
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Params.description }}</p>
+          <span class="project-panel-cta">View project <span aria-hidden="true">→</span></span>
+        </div>
+        {{- with .Params.shot }}
+        <div class="project-panel-media">
+          <img src="{{ . }}" alt="{{ $project.Params.shot_alt }}" loading="{{ if eq $index 0 }}eager{{ else }}lazy{{ end }}" width="{{ $project.Params.shot_width | default 840 }}" height="{{ $project.Params.shot_height | default 840 }}" />
+        </div>
+        {{- end }}
+      </article>
+      {{- end }}
+    </div>
+    <p class="corridor-hint"><span aria-hidden="true">↔</span> Drag, swipe, or use the arrow keys</p>
+  </section>
   {{- end }}
-  {{- if .Params.language }}
-  <footer class="entry-footer">
-    <span>{{ .Params.language }}</span>
-  </footer>
-  {{- end }}
-</article>
-{{- end }}
+
+  <section class="project-catalog" aria-labelledby="all-projects-heading">
+    <div class="project-catalog-head">
+      <div>
+        <p class="section-kicker">The wider workbench</p>
+        <h2 id="all-projects-heading">All projects</h2>
+      </div>
+      <div class="project-filters" aria-label="Filter projects">
+        <button type="button" class="project-filter is-active" data-project-filter="all" aria-pressed="true">All <span>{{ len $projects }}</span></button>
+        <button type="button" class="project-filter" data-project-filter="app" aria-pressed="false">Apps</button>
+        <button type="button" class="project-filter" data-project-filter="tool" aria-pressed="false">Tools</button>
+        <button type="button" class="project-filter" data-project-filter="open-source" aria-pressed="false">Open source</button>
+      </div>
+    </div>
+
+    <div class="project-index" data-project-index>
+      {{- range $projects }}
+      <article class="project-index-item" data-project-kind="{{ .Params.project_kind | default "open-source" }}">
+        <a class="project-index-main" href="{{ .RelPermalink }}">
+          <span class="project-index-title">{{ .Title }}</span>
+          <span class="project-index-description">{{ .Params.description }}</span>
+        </a>
+        <span class="project-index-kind">{{ .Params.project_type | default (.Params.language | default "Project") }}</span>
+        <span class="project-index-arrow" aria-hidden="true">↗</span>
+      </article>
+      {{- end }}
+    </div>
+    <p class="project-empty" data-project-empty hidden>No projects in this group yet.</p>
+  </section>
+</div>
 
 {{- end }}

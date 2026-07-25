@@ -5,34 +5,34 @@
     {{- partial "index_profile.html" . }}
   </section>
 
-  {{- $featuredApps := resources.Get "data/featured_apps.yaml" | transform.Unmarshal }}
-  {{- with $featuredApps }}
+  {{- $featuredProjectPages := where (where site.RegularPages "Section" "projects") "Params.featured" true }}
+  {{- $featuredProjects := first 4 ($featuredProjectPages.ByParam "order") }}
+  {{- with $featuredProjects }}
   <section class="app-shelf" aria-labelledby="app-shelf-heading">
     <div class="section-intro">
       <div>
-        <p class="section-kicker">4dl Apps</p>
-        <h2 id="app-shelf-heading">I make the tools I wish already existed.</h2>
+        <p class="section-kicker">Selected projects</p>
+        <h2 id="app-shelf-heading">I make the things I wish already existed.</h2>
       </div>
-      <a class="section-link" href="https://4dl.ca/">See all 4dl apps <span aria-hidden="true">↗</span></a>
+      <a class="section-link" href="/projects/">Explore all projects <span aria-hidden="true">→</span></a>
     </div>
 
-    <div class="featured-app-grid">
+    <div class="home-project-reel">
       {{- range . }}
-      <article class="featured-app-card" style="--app-accent: {{ .accent }}">
-        <a class="featured-app-card-link" href="{{ .url }}" aria-label="Open {{ .title }} at {{ .domain }}"></a>
+      <article class="featured-app-card" style="--app-accent: {{ .Params.accent | default "#b1603a" }}">
+        <a class="featured-app-card-link" href="{{ .RelPermalink }}" aria-label="Explore {{ .Title }}"></a>
         <div class="featured-app-shot">
-          <img src="{{ .shot }}" alt="{{ .alt }}" loading="lazy" width="840" height="525" />
+          <img src="{{ .Params.shot }}" alt="{{ .Params.shot_alt }}" loading="lazy" width="{{ .Params.shot_width | default 840 }}" height="{{ .Params.shot_height | default 840 }}" />
         </div>
         <div class="featured-app-body">
           <div class="featured-app-top">
-            <span class="featured-app-icon"><img src="{{ .icon }}" alt="" width="40" height="40" /></span>
-            <span class="featured-app-tags">{{ delimit .tags " · " }}</span>
+            {{- with .Params.icon }}<span class="featured-app-icon"><img src="{{ . }}" alt="" width="40" height="40" /></span>{{- end }}
+            <span class="featured-app-tags">{{ .Params.project_type }}{{ with .Params.status }} · {{ . }}{{ end }}</span>
           </div>
-          <h3>{{ .title }}</h3>
-          <p>{{ .blurb }}</p>
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Params.description }}</p>
           <div class="featured-app-foot">
-            <span class="featured-app-open">Open <span aria-hidden="true">↗</span></span>
-            <code>{{ .domain }}</code>
+            <span class="featured-app-open">View project <span aria-hidden="true">→</span></span>
           </div>
         </div>
       </article>

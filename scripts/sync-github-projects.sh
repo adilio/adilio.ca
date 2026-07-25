@@ -3,7 +3,8 @@
 set -e
 
 EXCLUDED_FILE=".github/excluded-repos.txt"
-MAX_PROJECTS=10
+MAX_PROJECTS=24
+GENERATED_DIR="content/projects/generated"
 
 # Emit a value as a double-quoted YAML scalar with quotes/backslashes escaped.
 # YAML is a JSON superset, so jq's JSON string encoding is valid frontmatter and
@@ -26,8 +27,10 @@ fi
 gh repo list adilio --limit 100 --json name,description,updatedAt,url,languages,visibility | \
   jq -r 'sort_by(.updatedAt) | reverse | .[] | select(.visibility == "PUBLIC") | @json' > /tmp/repos.json
 
-# Clear existing project files (keep _index.md)
-rm -rf content/projects/*.md 2>/dev/null || true
+# Refresh only machine-generated entries. Curated project stories in
+# content/projects/ are intentionally preserved.
+mkdir -p "$GENERATED_DIR"
+find "$GENERATED_DIR" -maxdepth 1 -type f -name '*.md' -delete
 
 # Helper function to generate a project file
 generate_project() {
@@ -55,13 +58,24 @@ generate_project() {
 
   local DATE=$(echo "$UPDATED" | cut -d'T' -f1)
 
-  cat > "content/projects/${NAME}.md" << EOF
+  # A curated page with the same slug takes precedence over the generated
+  # repository summary and should not be duplicated in the catalog.
+  if [ -f "content/projects/${NAME}.md" ] || [ -f "content/projects/${NAME,,}.md" ]; then
+    echo "Curated: $NAME"
+    return 2
+  fi
+
+  cat > "${GENERATED_DIR}/${NAME}.md" << EOF
 ---
 title: $(yaml_str "$NAME")
 date: $DATE
 description: $(yaml_str "$DESCRIPTION")
-link: $(yaml_str "$URL")
+repo: $(yaml_str "$URL")
 language: $(yaml_str "${LANGUAGES:-Unknown}")
+project_kind: "open-source"
+project_type: "Open source"
+order: 1000
+generated: true
 ---
 
 ${LONG_DESC}

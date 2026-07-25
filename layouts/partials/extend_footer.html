@@ -61,3 +61,53 @@
     apply(preference());
   })();
 </script>
+<script>
+  (function () {
+    const reel = document.querySelector("[data-project-reel]");
+    if (reel) {
+      const panels = Array.from(reel.querySelectorAll(".project-panel"));
+      const move = function (direction) {
+        const current = panels.reduce(function (closest, panel) {
+          return Math.abs(panel.offsetLeft - reel.scrollLeft) < Math.abs(closest.offsetLeft - reel.scrollLeft) ? panel : closest;
+        }, panels[0]);
+        const index = panels.indexOf(current);
+        const target = panels[Math.max(0, Math.min(panels.length - 1, index + direction))];
+        if (target) target.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "nearest",
+          inline: "start"
+        });
+      };
+
+      document.querySelector("[data-corridor-prev]")?.addEventListener("click", function () { move(-1); });
+      document.querySelector("[data-corridor-next]")?.addEventListener("click", function () { move(1); });
+      reel.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          move(event.key === "ArrowLeft" ? -1 : 1);
+        }
+      });
+    }
+
+    const filters = Array.from(document.querySelectorAll("[data-project-filter]"));
+    const items = Array.from(document.querySelectorAll("[data-project-kind]"));
+    const empty = document.querySelector("[data-project-empty]");
+    filters.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const selected = button.dataset.projectFilter;
+        let visible = 0;
+        filters.forEach(function (filter) {
+          const active = filter === button;
+          filter.classList.toggle("is-active", active);
+          filter.setAttribute("aria-pressed", String(active));
+        });
+        items.forEach(function (item) {
+          const show = selected === "all" || item.dataset.projectKind === selected;
+          item.hidden = !show;
+          if (show) visible += 1;
+        });
+        if (empty) empty.hidden = visible !== 0;
+      });
+    });
+  })();
+</script>

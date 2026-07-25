@@ -2,8 +2,13 @@
 title: "wiz-tools"
 date: 2026-07-12
 description: "A collection of useful tooling for working with Wiz"
-link: "https://github.com/adilio/wiz-tools"
+repo: "https://github.com/adilio/wiz-tools"
 language: "HTML"
+project_kind: "tool"
+project_type: "Tool collection"
+order: 1000
 ---
 
-A small collection of practical tools for working with [Wiz](https://www.wiz.io) data, exports, and sizing workflows. The repo is intentionally lightweight: most tools are self-contained and can be used directly from the browser, terminal, or Azure Cloud Shell without a build ste...
+A small collection of practical tools for working with Wiz data, exports, and sizing workflows.
+
+The repository stays intentionally lightweight: most utilities are self-contained and run directly in a browser, terminal, or cloud shell without a build step.
