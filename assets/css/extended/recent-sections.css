@@ -177,14 +177,20 @@ button#theme-toggle {
 }
 
 .home-profile .profile_inner {
+    display: grid;
+    width: 100%;
     max-width: 320px;
-    align-items: flex-start;
+    grid-template-columns: 96px minmax(0, 1fr);
+    align-items: center;
+    gap: 0 0.8rem;
 }
 
 .home-profile .profile img {
-    width: clamp(112px, 13vw, 142px);
+    grid-column: 1;
+    grid-row: 1;
+    width: 112px;
     height: auto;
-    margin: 0;
+    margin: 0 0 0 -14px;
     transition: transform 220ms var(--shelf-ease);
 }
 
@@ -193,28 +199,43 @@ button#theme-toggle {
 }
 
 .home-profile .profile h1 {
-    margin-top: 1.2rem;
-    font-size: clamp(2.15rem, 4vw, 3rem);
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: clamp(2.05rem, 3.2vw, 2.45rem);
     line-height: 1;
     letter-spacing: -0.03em;
 }
 
-.home-profile .profile span {
-    margin-top: 0.75rem;
+.home-profile .profile_inner > span {
+    grid-column: 1 / -1;
+    margin-top: 1.35rem;
     font-size: 1rem;
     line-height: 1.5;
 }
 
 .home-profile .social-icons {
+    grid-column: 1 / -1;
     justify-content: flex-start;
+    margin-top: 0.9rem;
 }
 
 .home-profile .buttons {
-    justify-content: flex-start;
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, auto));
+    justify-content: start;
     gap: 0.5rem;
+    max-width: none;
+    margin-top: 1.1rem;
 }
 
 .home-profile .button {
+    display: grid;
+    min-height: 42px;
+    place-items: center;
+    margin: 0;
+    padding: 0.55rem 0.65rem;
     border: 1px solid var(--shelf-rule);
     border-radius: 10px;
     background: var(--shelf-raised);
@@ -852,8 +873,18 @@ button#theme-toggle {
     }
 
     .home-profile .profile_inner {
+        display: flex;
+        width: auto;
         max-width: 360px;
         align-items: center;
+    }
+
+    .home-profile .profile img {
+        margin: 0;
+    }
+
+    .home-profile .profile h1 {
+        margin-top: 1.2rem;
     }
 
     .home-profile .social-icons,
