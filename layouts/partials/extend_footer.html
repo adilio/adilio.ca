@@ -63,6 +63,72 @@
 </script>
 <script>
   (function () {
+    const homeReel = document.querySelector("[data-home-showcase]");
+    if (homeReel) {
+      const slides = Array.from(homeReel.querySelectorAll("[data-home-showcase-slide]"));
+      const currentLabel = document.querySelector("[data-home-showcase-current]");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let currentIndex = 0;
+      let targetIndex = 0;
+      let paused = false;
+      let lastInteraction = Date.now();
+      let ticking = false;
+
+      const updateCurrent = function () {
+        const reelLeft = homeReel.getBoundingClientRect().left;
+        const closest = slides.reduce(function (best, slide) {
+          return Math.abs(slide.getBoundingClientRect().left - reelLeft) < Math.abs(best.getBoundingClientRect().left - reelLeft) ? slide : best;
+        }, slides[0]);
+        currentIndex = Math.max(0, slides.indexOf(closest));
+        if (Math.abs(closest.getBoundingClientRect().left - reelLeft) < 2) targetIndex = currentIndex;
+        if (currentLabel) currentLabel.textContent = String(currentIndex + 1);
+        slides.forEach(function (slide, index) {
+          slide.toggleAttribute("data-active", index === currentIndex);
+        });
+        ticking = false;
+      };
+
+      const goTo = function (index, manual) {
+        targetIndex = (index + slides.length) % slides.length;
+        if (manual) lastInteraction = Date.now();
+        slides[targetIndex]?.scrollIntoView({
+          behavior: reducedMotion.matches ? "auto" : "smooth",
+          block: "nearest",
+          inline: "start"
+        });
+      };
+
+      document.querySelector("[data-home-showcase-prev]")?.addEventListener("click", function () { goTo(targetIndex - 1, true); });
+      document.querySelector("[data-home-showcase-next]")?.addEventListener("click", function () { goTo(targetIndex + 1, true); });
+      homeReel.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          goTo(targetIndex + (event.key === "ArrowLeft" ? -1 : 1), true);
+        }
+      });
+      homeReel.addEventListener("scroll", function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateCurrent);
+        }
+      }, { passive: true });
+      homeReel.addEventListener("mouseenter", function () { paused = true; });
+      homeReel.addEventListener("mouseleave", function () { paused = false; });
+      homeReel.addEventListener("focusin", function () { paused = true; });
+      homeReel.addEventListener("focusout", function () { paused = false; });
+      updateCurrent();
+
+      if (!reducedMotion.matches && slides.length > 1) {
+        window.setInterval(function () {
+          const rect = homeReel.getBoundingClientRect();
+          const visible = rect.bottom > 0 && rect.top < window.innerHeight;
+          if (!paused && visible && document.visibilityState === "visible" && Date.now() - lastInteraction > 5000) {
+            goTo(targetIndex + 1, false);
+          }
+        }, 6000);
+      }
+    }
+
     const reel = document.querySelector("[data-project-reel]");
     if (reel) {
       const panels = Array.from(reel.querySelectorAll(".project-panel"));

@@ -2,47 +2,53 @@
 
 {{- $featuredProjectPages := where (where site.RegularPages "Section" "projects") "Params.featured" true }}
 {{- $featuredProjects := $featuredProjectPages.ByParam "order" }}
-{{- $lead := index $featuredProjects 0 }}
-{{- with where $featuredProjects "Title" "PSCumulus" }}
-  {{- $lead = index . 0 }}
-{{- end }}
-{{- $supporting := first 4 (where $featuredProjects "RelPermalink" "ne" $lead.RelPermalink) }}
+{{- $showcase := first 6 $featuredProjects }}
+{{- $supporting := first 4 $featuredProjects }}
 {{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
 {{- $talks := (where site.RegularPages "Section" "talks").ByDate.Reverse }}
 
 <div class="home-layout">
-  <section class="home-intro" aria-labelledby="home-intro-heading">
-    <div class="home-intro-copy">
-      <div class="home-identity">
-        <img src="{{ site.Params.profileMode.imageUrl }}" alt="Illustrated portrait of Adil Leghari" width="80" height="80" />
-        <p>Adil Leghari<br><span>Senior Solutioneer @ Wiz</span></p>
-      </div>
-
-      <h1 id="home-intro-heading">I make useful things for messy systems.</h1>
-      <p class="home-intro-lede">Cloud security, automation, PowerShell, and oddly specific apps—built to turn mild frustration into something people can actually use.</p>
-
-      <div class="home-intro-actions">
-        <a class="home-action home-action-primary" href="/projects/">Explore my projects <span aria-hidden="true">→</span></a>
-        <a class="home-action" href="/about/">More about me</a>
-      </div>
-
-      <div class="home-socials" aria-label="Find Adil online">
-        {{- partial "social_icons.html" (dict "align" "") }}
-      </div>
+  <section class="home-hero" aria-label="Introduction and project showcase">
+    <div class="home-profile">
+      {{- partial "index_profile.html" . }}
     </div>
 
-    <article class="home-lead-project" style="--project-accent: {{ $lead.Params.accent | default "#5468ff" }}">
-      <a class="home-lead-link" href="{{ $lead.RelPermalink }}" aria-label="Explore {{ $lead.Title }}"></a>
-      <div class="home-lead-media">
-        <img src="{{ $lead.Params.shot }}" alt="{{ $lead.Params.shot_alt }}" width="{{ $lead.Params.shot_width | default 840 }}" height="{{ $lead.Params.shot_height | default 840 }}" />
+    {{- with $showcase }}
+    <div class="home-showcase">
+      <div class="home-showcase-head">
+        <div>
+          <p class="section-kicker">A few things I’ve made</p>
+          <h2>Apps, tools, and experiments.</h2>
+        </div>
+        <div class="home-showcase-controls" aria-label="Project showcase controls">
+          <button type="button" data-home-showcase-prev aria-label="Previous project">←</button>
+          <button type="button" data-home-showcase-next aria-label="Next project">→</button>
+        </div>
       </div>
-      <div class="home-lead-body">
-        <p>{{ $lead.Params.project_type }}{{ with $lead.Params.status }} · {{ . }}{{ end }}</p>
-        <h2>{{ $lead.Title }}</h2>
-        <span>{{ $lead.Params.description }}</span>
-        <strong>See the project <span aria-hidden="true">→</span></strong>
+
+      <div class="home-showcase-reel" data-home-showcase tabindex="0" aria-label="Featured projects">
+        {{- range . }}
+        <article class="home-showcase-slide" data-home-showcase-slide style="--project-accent: {{ .Params.accent | default "#b1603a" }}">
+          <a class="home-showcase-link" href="{{ .RelPermalink }}" aria-label="Explore {{ .Title }}"></a>
+          <div class="home-showcase-media">
+            <img src="{{ .Params.shot }}" alt="{{ .Params.shot_alt }}" width="{{ .Params.shot_width | default 840 }}" height="{{ .Params.shot_height | default 840 }}" />
+          </div>
+          <div class="home-showcase-copy">
+            <p>{{ .Params.project_type }}{{ with .Params.status }} · {{ . }}{{ end }}</p>
+            <h3>{{ .Title }}</h3>
+            <span>{{ .Params.description }}</span>
+            <strong aria-hidden="true">↗</strong>
+          </div>
+        </article>
+        {{- end }}
       </div>
-    </article>
+
+      <div class="home-showcase-foot">
+        <p><span data-home-showcase-current>1</span> / {{ len . }}</p>
+        <span>Rotates gently. Swipe or use the arrows whenever you like.</span>
+      </div>
+    </div>
+    {{- end }}
   </section>
 
   {{- with $supporting }}
