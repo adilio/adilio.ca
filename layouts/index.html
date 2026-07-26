@@ -1,39 +1,71 @@
 {{- define "main" }}
 
-<div class="home-layout">
-  <section class="home-hero" aria-label="Introduction">
-    {{- partial "index_profile.html" . }}
-  </section>
+{{- $featuredProjectPages := where (where site.RegularPages "Section" "projects") "Params.featured" true }}
+{{- $featuredProjects := $featuredProjectPages.ByParam "order" }}
+{{- $lead := index $featuredProjects 0 }}
+{{- with where $featuredProjects "Title" "PSCumulus" }}
+  {{- $lead = index . 0 }}
+{{- end }}
+{{- $supporting := first 4 (where $featuredProjects "RelPermalink" "ne" $lead.RelPermalink) }}
+{{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+{{- $talks := (where site.RegularPages "Section" "talks").ByDate.Reverse }}
 
-  {{- $featuredProjectPages := where (where site.RegularPages "Section" "projects") "Params.featured" true }}
-  {{- $featuredProjects := first 4 ($featuredProjectPages.ByParam "order") }}
-  {{- with $featuredProjects }}
-  <section class="app-shelf" aria-labelledby="app-shelf-heading">
-    <div class="section-intro">
-      <div>
-        <p class="section-kicker">Selected projects</p>
-        <h2 id="app-shelf-heading">I make the things I wish already existed.</h2>
+<div class="home-layout">
+  <section class="home-intro" aria-labelledby="home-intro-heading">
+    <div class="home-intro-copy">
+      <div class="home-identity">
+        <img src="{{ site.Params.profileMode.imageUrl }}" alt="Illustrated portrait of Adil Leghari" width="80" height="80" />
+        <p>Adil Leghari<br><span>Senior Solutioneer @ Wiz</span></p>
       </div>
-      <a class="section-link" href="/projects/">Explore all projects <span aria-hidden="true">→</span></a>
+
+      <h1 id="home-intro-heading">I make useful things for messy systems.</h1>
+      <p class="home-intro-lede">Cloud security, automation, PowerShell, and oddly specific apps—built to turn mild frustration into something people can actually use.</p>
+
+      <div class="home-intro-actions">
+        <a class="home-action home-action-primary" href="/projects/">Explore my projects <span aria-hidden="true">→</span></a>
+        <a class="home-action" href="/about/">More about me</a>
+      </div>
+
+      <div class="home-socials" aria-label="Find Adil online">
+        {{- partial "social_icons.html" (dict "align" "") }}
+      </div>
     </div>
 
-    <div class="home-project-reel">
+    <article class="home-lead-project" style="--project-accent: {{ $lead.Params.accent | default "#5468ff" }}">
+      <a class="home-lead-link" href="{{ $lead.RelPermalink }}" aria-label="Explore {{ $lead.Title }}"></a>
+      <div class="home-lead-media">
+        <img src="{{ $lead.Params.shot }}" alt="{{ $lead.Params.shot_alt }}" width="{{ $lead.Params.shot_width | default 840 }}" height="{{ $lead.Params.shot_height | default 840 }}" />
+      </div>
+      <div class="home-lead-body">
+        <p>{{ $lead.Params.project_type }}{{ with $lead.Params.status }} · {{ . }}{{ end }}</p>
+        <h2>{{ $lead.Title }}</h2>
+        <span>{{ $lead.Params.description }}</span>
+        <strong>See the project <span aria-hidden="true">→</span></strong>
+      </div>
+    </article>
+  </section>
+
+  {{- with $supporting }}
+  <section class="home-work" aria-labelledby="home-work-heading">
+    <div class="section-intro home-work-intro">
+      <div>
+        <p class="section-kicker">Selected work</p>
+        <h2 id="home-work-heading">Across apps, cloud, and security.</h2>
+      </div>
+      <a class="section-link" href="/projects/">The complete workbench <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="home-project-strip">
       {{- range . }}
-      <article class="featured-app-card" style="--app-accent: {{ .Params.accent | default "#b1603a" }}">
-        <a class="featured-app-card-link" href="{{ .RelPermalink }}" aria-label="Explore {{ .Title }}"></a>
-        <div class="featured-app-shot">
+      <article class="home-project" style="--project-accent: {{ .Params.accent | default "#b1603a" }}">
+        <a class="home-project-link" href="{{ .RelPermalink }}" aria-label="Explore {{ .Title }}"></a>
+        <div class="home-project-media">
           <img src="{{ .Params.shot }}" alt="{{ .Params.shot_alt }}" loading="lazy" width="{{ .Params.shot_width | default 840 }}" height="{{ .Params.shot_height | default 840 }}" />
         </div>
-        <div class="featured-app-body">
-          <div class="featured-app-top">
-            {{- with .Params.icon }}<span class="featured-app-icon"><img src="{{ . }}" alt="" width="40" height="40" /></span>{{- end }}
-            <span class="featured-app-tags">{{ .Params.project_type }}{{ with .Params.status }} · {{ . }}{{ end }}</span>
-          </div>
+        <div class="home-project-body">
+          <p>{{ .Params.project_type }}</p>
           <h3>{{ .Title }}</h3>
-          <p>{{ .Params.description }}</p>
-          <div class="featured-app-foot">
-            <span class="featured-app-open">View project <span aria-hidden="true">→</span></span>
-          </div>
+          <span>{{ .Params.description }}</span>
         </div>
       </article>
       {{- end }}
@@ -41,76 +73,62 @@
   </section>
   {{- end }}
 
-{{- $posts    := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
-{{- $talks    := (where site.RegularPages "Section" "talks").ByDate.Reverse }}
-{{- $projects := (where site.RegularPages "Section" "projects").ByDate.Reverse }}
-
-{{- if or $posts $talks $projects }}
-<div class="recent-sections">
-
-  <div class="section-intro recent-intro">
-    <div>
-      <p class="section-kicker">Notes from the workbench</p>
-      <h2>Writing, conversations, and projects.</h2>
+  {{- if or $posts $talks }}
+  <section class="home-notes" aria-labelledby="home-notes-heading">
+    <div class="home-notes-heading">
+      <p class="section-kicker">From the workbench</p>
+      <h2 id="home-notes-heading">
+        {{- if and $posts $talks -}}
+          Writing and conversations.
+        {{- else if $posts -}}
+          Notes from the workbench.
+        {{- else -}}
+          Talks and conversations.
+        {{- end -}}
+      </h2>
     </div>
-  </div>
 
-  {{- if $posts }}
-  <section class="recent-section">
-    <h2 class="recent-section-heading">Recent Posts</h2>
-    <ul class="recent-list">
-      {{- range first 3 $posts }}
-      <li class="recent-item">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        <span class="recent-meta">{{ .Date.Format "Jan 2006" }}</span>
-      </li>
+    <div class="home-notes-grid">
+      {{- if $posts }}
+      <div class="home-note-column">
+        <div class="home-note-column-head">
+          <h3>Recent writing</h3>
+          <a href="/posts/">All posts →</a>
+        </div>
+        <ul class="recent-list">
+          {{- range first 3 $posts }}
+          <li class="recent-item">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <span class="recent-meta">{{ .Date.Format "Jan 2006" }}</span>
+          </li>
+          {{- end }}
+        </ul>
+      </div>
       {{- end }}
-    </ul>
-    <a class="recent-see-all" href="/posts/">All posts →</a>
+
+      {{- if $talks }}
+      <div class="home-note-column">
+        <div class="home-note-column-head">
+          <h3>Talks &amp; podcasts</h3>
+          <a href="/talks/">All talks →</a>
+        </div>
+        <ul class="recent-list">
+          {{- range first 3 $talks }}
+          <li class="recent-item">
+            {{- if .Params.link }}
+            <a href="{{ .Params.link }}" rel="noopener noreferrer">{{ .Title }}</a>
+            {{- else }}
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+            {{- end }}
+            <span class="recent-meta">{{ .Date.Format "2006" }}</span>
+          </li>
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+    </div>
   </section>
   {{- end }}
-
-  {{- if $talks }}
-  <section class="recent-section">
-    <h2 class="recent-section-heading">Talks &amp; Podcasts</h2>
-    <ul class="recent-list">
-      {{- range first 3 $talks }}
-      <li class="recent-item">
-        {{- if .Params.link }}
-        <a href="{{ .Params.link }}" rel="noopener noreferrer">{{ .Title }}</a>
-        {{- else }}
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        {{- end }}
-        <span class="recent-meta">{{ .Date.Format "2006" }}</span>
-      </li>
-      {{- end }}
-    </ul>
-    <a class="recent-see-all" href="/talks/">All talks →</a>
-  </section>
-  {{- end }}
-
-  {{- if $projects }}
-  <section class="recent-section">
-    <h2 class="recent-section-heading">Projects</h2>
-    <ul class="recent-list">
-      {{- range first 3 $projects }}
-      <li class="recent-item">
-        {{- if .Params.link }}
-        <a href="{{ .Params.link }}" rel="noopener noreferrer">{{ .Title }}</a>
-        {{- else }}
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        {{- end }}
-        <span class="recent-meta">{{ .Params.description }}</span>
-      </li>
-      {{- end }}
-    </ul>
-    <a class="recent-see-all" href="/projects/">All projects →</a>
-  </section>
-  {{- end }}
-
-</div>
-{{- end }}
-
 </div>
 
 {{- end }}
