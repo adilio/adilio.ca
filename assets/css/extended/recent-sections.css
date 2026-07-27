@@ -79,6 +79,7 @@ h3,
 
 .nav {
     max-width: 1080px;
+    flex-wrap: nowrap;
 }
 
 .logo a {
@@ -110,6 +111,12 @@ button#theme-toggle {
     border: 1px solid var(--shelf-rule);
     border-radius: 999px;
     background: var(--shelf-sunk);
+}
+
+.nav > .theme-picker {
+    flex: none;
+    align-self: center;
+    margin: 0 var(--gap) 0 0;
 }
 
 .theme-picker-option {
@@ -240,6 +247,12 @@ button#theme-toggle {
     border-radius: 10px;
     background: var(--shelf-raised);
     transition: border-color 180ms var(--shelf-ease), transform 180ms var(--shelf-ease);
+    white-space: nowrap;
+}
+
+.home-profile .button-inner {
+    word-break: keep-all;
+    white-space: nowrap;
 }
 
 .home-profile .button:hover {
@@ -858,6 +871,23 @@ button#theme-toggle {
 }
 
 @media (max-width: 680px) {
+    .nav {
+        flex-wrap: wrap;
+    }
+
+    .nav > .logo {
+        flex: 1 1 auto;
+        margin-inline-end: 0;
+    }
+
+    .nav > .theme-picker {
+        margin-inline-end: var(--gap);
+    }
+
+    #menu {
+        flex: 1 0 calc(100% - 2 * var(--gap));
+    }
+
     .home-layout {
         gap: 4rem;
         padding-top: 2rem;

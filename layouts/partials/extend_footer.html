@@ -30,6 +30,17 @@
     }).join("");
     original.insertAdjacentElement("afterend", control);
 
+    const nav = document.querySelector(".nav");
+    const menu = document.getElementById("menu");
+    const compactHeader = window.matchMedia("(max-width: 680px)");
+    const placeThemePicker = function () {
+      if (!nav || !menu) return;
+      if (compactHeader.matches) nav.insertBefore(control, menu);
+      else nav.appendChild(control);
+    };
+    compactHeader.addEventListener("change", placeThemePicker);
+    placeThemePicker();
+
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const inputs = Array.from(control.querySelectorAll("input"));
 
