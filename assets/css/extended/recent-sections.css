@@ -839,6 +839,7 @@ button#theme-toggle {
     #menu {
         box-sizing: border-box;
         flex: 1 0 100%;
+        justify-content: safe center;
         width: 100%;
         margin: 0;
         padding-inline: var(--gap);
