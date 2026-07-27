@@ -2,8 +2,7 @@
 
 {{- $featuredProjectPages := where (where site.RegularPages "Section" "projects") "Params.featured" true }}
 {{- $featuredProjects := $featuredProjectPages.ByParam "order" }}
-{{- $showcase := first 6 $featuredProjects }}
-{{- $supporting := first 4 $featuredProjects }}
+{{- $showcase := $featuredProjects }}
 {{- $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
 {{- $talks := (where site.RegularPages "Section" "talks").ByDate.Reverse }}
 
@@ -45,39 +44,14 @@
 
       <div class="home-showcase-foot">
         <p><span data-home-showcase-current>1</span> / {{ len . }}</p>
-        <span>Rotates gently. Swipe or use the arrows whenever you like.</span>
+        <div>
+          <span class="home-showcase-note">Rotates gently. Swipe or use the arrows whenever you like.</span>
+          <a href="/projects/">All projects <span aria-hidden="true">→</span></a>
+        </div>
       </div>
     </div>
     {{- end }}
   </section>
-
-  {{- with $supporting }}
-  <section class="home-work" aria-labelledby="home-work-heading">
-    <div class="section-intro home-work-intro">
-      <div>
-        <p class="section-kicker">Selected work</p>
-        <h2 id="home-work-heading">Across apps, cloud, and security.</h2>
-      </div>
-      <a class="section-link" href="/projects/">The complete workbench <span aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="home-project-strip">
-      {{- range . }}
-      <article class="home-project" style="--project-accent: {{ .Params.accent | default "#b1603a" }}">
-        <a class="home-project-link" href="{{ .RelPermalink }}" aria-label="Explore {{ .Title }}"></a>
-        <div class="home-project-media">
-          <img src="{{ .Params.shot }}" alt="{{ .Params.shot_alt }}" loading="lazy" width="{{ .Params.shot_width | default 840 }}" height="{{ .Params.shot_height | default 840 }}" />
-        </div>
-        <div class="home-project-body">
-          <p>{{ .Params.project_type }}</p>
-          <h3>{{ .Title }}</h3>
-          <span>{{ .Params.description }}</span>
-        </div>
-      </article>
-      {{- end }}
-    </div>
-  </section>
-  {{- end }}
 
   {{- if or $posts $talks }}
   <section class="home-notes" aria-labelledby="home-notes-heading">
