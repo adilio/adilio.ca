@@ -897,8 +897,12 @@ button#theme-toggle {
     }
 
     #menu {
-        flex: 1 0 calc(100% - 2 * var(--gap));
-        margin: auto var(--gap);
+        box-sizing: border-box;
+        flex: 1 0 100%;
+        width: 100%;
+        margin: 0;
+        padding-inline: var(--gap);
+        scroll-padding-inline: var(--gap);
     }
 
     .home-layout {

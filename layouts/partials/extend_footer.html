@@ -33,10 +33,16 @@
     const nav = document.querySelector(".nav");
     const menu = document.getElementById("menu");
     const compactHeader = window.matchMedia("(max-width: 680px)");
+    const resetMenuPosition = function () {
+      if (!menu) return;
+      menu.scrollLeft = 0;
+      localStorage.removeItem("menu-scroll-position");
+    };
     const placeThemePicker = function () {
       if (!nav || !menu) return;
       if (compactHeader.matches) nav.insertBefore(control, menu);
       else nav.appendChild(control);
+      resetMenuPosition();
     };
     compactHeader.addEventListener("change", placeThemePicker);
     placeThemePicker();
