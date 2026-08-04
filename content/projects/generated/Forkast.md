@@ -1,6 +1,6 @@
 ---
 title: "Forkast"
-date: 2026-08-02
+date: 2026-08-03
 description: "Meal planning app"
 repo: "https://github.com/adilio/Forkast"
 language: "TypeScript, JavaScript, HTML, CSS"
@@ -10,4 +10,4 @@ order: 1000
 generated: true
 ---
 
-Forkast is a private household recipe manager and store-aware shopping PWA. It captures clean recipes from ordinary websites, scales ingredient quantities, and keeps City Market and Costco lists synchronized through Firebase....
+Forkast is a private household recipe manager and store-aware shopping PWA. It captures clean recipes from ordinary websites, scales ingredient quantities, and keeps a list per store — each household defines its own — synchronized through Firebase....
